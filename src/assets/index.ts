@@ -1,0 +1,1 @@
+export { default as GreenIcon } from './header_icon.svg?react';
