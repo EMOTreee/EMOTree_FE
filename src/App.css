@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Abel";
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/Abel-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+:root {
+    font-family: "Pretendard";
+}
+
+@layer components {
+    .center-absolute {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .no-scroll {
+        scrollbar-width: none;
+    }
+
+    .transition-300 {
+        transition: all 300ms ease-in-out;
+    }
+
+    .shadow-0-4-20-0 {
+        box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+@theme {
+    --font-abel: 'Abel';
+    --font-pretendard: 'Pretendard';
+}
