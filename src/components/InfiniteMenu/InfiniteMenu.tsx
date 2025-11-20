@@ -221,105 +221,56 @@ class Geometry {
 class IcosahedronGeometry extends Geometry {
   constructor() {
     super();
-    const t = Math.sqrt(5) * 0.5 + 0.5;
+
+    // 황금비 기반 좌표값
+    const t = (1 + Math.sqrt(5)) / 2;
+
+    // 12개의 기존 Icosahedron 꼭짓점
     this.addVertex(
-      -1,
-      t,
-      0,
-      1,
-      t,
-      0,
-      -1,
-      -t,
-      0,
-      1,
-      -t,
-      0,
-      0,
-      -1,
-      t,
-      0,
-      1,
-      t,
-      0,
-      -1,
-      -t,
-      0,
-      1,
-      -t,
-      t,
-      0,
-      -1,
-      t,
-      0,
-      1,
-      -t,
-      0,
-      -1,
-      -t,
-      0,
-      1
-    ).addFace(
-      0,
-      11,
-      5,
-      0,
-      5,
-      1,
-      0,
-      1,
-      7,
-      0,
-      7,
-      10,
-      0,
-      10,
-      11,
-      1,
-      5,
-      9,
-      5,
-      11,
-      4,
-      11,
-      10,
-      2,
-      10,
-      7,
-      6,
-      7,
-      1,
-      8,
-      3,
-      9,
-      4,
-      3,
-      4,
-      2,
-      3,
-      2,
-      6,
-      3,
-      6,
-      8,
-      3,
-      8,
-      9,
-      4,
-      9,
-      5,
-      2,
-      4,
-      11,
-      6,
-      2,
-      10,
-      8,
-      6,
-      7,
-      9,
-      8,
-      1
+      // (±1, ±t, 0)
+      -1,  t, 0,
+       1,  t, 0,
+      -1, -t, 0,
+       1, -t, 0,
+
+      // (0, ±1, ±t)
+       0, -1,  t,
+       0,  1,  t,
+       0, -1, -t,
+       0,  1, -t,
+
+      // (±t, 0, ±1)
+       t,  0, -1,
+       t,  0,  1,
+      -t,  0, -1,
+      -t,  0,  1
+    );
+
+    // 20개의 면 (삼각형들)
+    this.addFace(
+      0, 11,  5,
+      0,  5,  1,
+      0,  1,  7,
+      0,  7, 10,
+      0, 10, 11,
+
+      1,  5,  9,
+      5, 11,  4,
+     11, 10,  2,
+     10,  7,  6,
+      7,  1,  8,
+
+      3,  9,  4,
+      3,  4,  2,
+      3,  2,  6,
+      3,  6,  8,
+      3,  8,  9,
+
+      4,  9,  5,
+      2,  4, 11,
+      6,  2, 10,
+      8,  6,  7,
+      9,  8,  1
     );
   }
 }
@@ -1006,33 +957,13 @@ class InfiniteGridMenu {
   }
 
   private updateDiscBaseScaleFromViewport(): void {
-    // 카메라에서 원점까지 거리 (원판들이 대략 원점 주변에 있다고 가정)
     const d = this.camera.position[2];
 
-    // 화면 세로 방향으로 보이는 반 높이 (월드 단위)
     const halfHeight = Math.tan(this.camera.fov / 2) * d;
-    // 화면 가로 방향으로 보이는 반 너비 (월드 단위)
     const halfWidth = halfHeight * this.camera.aspect;
 
-    /**
-     * 원하는 vw 비율
-     * 예를 들어:
-     *   discVw = 0.2  -> 지름이 20vw
-     *   discVw = 0.1  -> 지름이 10vw
-     */
-    const discVw = 0.2; // 15vw 정도로 보이게 하고 싶다면 0.15
+    const discVw = 0.2;
 
-    /**
-     * halfWidth = 화면 전체 너비의 "반" (월드 단위)
-     * 100vw 전체 폭 -> 2 * halfWidth
-     *
-     * 지름 비율을 discVw(0~1)라 하면
-     *   지름(world) = (2 * halfWidth) * discVw
-     *   반지름(world) = halfWidth * discVw
-     *
-     * 기본 DiscGeometry 반지름이 1이므로,
-     *   scale = targetRadiusWorld / 1
-     */
     const targetRadiusWorld = halfWidth * discVw;
     this.discBaseScale = targetRadiusWorld;
   }
@@ -1064,11 +995,10 @@ class InfiniteGridMenu {
     this.camera.position[2] += (cameraTargetZ - this.camera.position[2]) / damping;
     this.updateCameraMatrix();
 
-    // 카메라 위치가 바뀌었으니, 그에 맞춰 원판 크기도 다시 계산
     this.updateDiscBaseScaleFromViewport();
 
     const targetScale = this.control.isPointerDown ? 0.6 : 1.0;
-    const SCALE_DAMPING = 0.15; // 값 낮출수록 더 천천히 따라감
+    const SCALE_DAMPING = 0.15;
     this.scaleFactor += (targetScale - this.scaleFactor) * SCALE_DAMPING;
   }
 
@@ -1122,7 +1052,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
 
-    handleResize(); // 초기 1회
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -1160,14 +1090,14 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
-  const handleButtonClick = () => {
-    if (!activeItem?.link) return;
-    if (activeItem.link.startsWith('http')) {
-      // window.open(activeItem.link, '_blank');
-    } else {
-      console.log('Internal route:', activeItem.link);
-    }
-  };
+  // const handleButtonClick = () => {
+  //   if (!activeItem?.link) return;
+  //   if (activeItem.link.startsWith('http')) {
+  //     // window.open(activeItem.link, '_blank');
+  //   } else {
+  //     console.log('Internal route:', activeItem.link);
+  //   }
+  // };
 
   return (
     <div className="relative w-full h-full">
