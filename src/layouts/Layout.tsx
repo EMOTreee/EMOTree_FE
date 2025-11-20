@@ -3,7 +3,7 @@ import Header from "../components/layout/Header";
 
 export default function Layout() {
   return (
-    <div className="bg-bg flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <main>
         <Outlet />
