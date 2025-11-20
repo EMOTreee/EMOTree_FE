@@ -1,12 +1,18 @@
+import useAnimateNavigate from "../../hooks/useAnimateNavigate";
+
 type InfiniteMenuTitleProps = {
   isMoving: boolean;
   title: string;
+  link: string;
 }
 
 const InfiniteMenuTitle = ({
   isMoving,
   title,
+  link,
 }: InfiniteMenuTitleProps) => {
+
+  const animateNavigate = useAnimateNavigate();
 
   return (
     <h2
@@ -24,7 +30,8 @@ const InfiniteMenuTitle = ({
           ${isMoving
           ? 'opacity-0 pointer-events-none duration-100ms'
           : 'opacity-100 pointer-events-auto duration-500ms'
-        }`}>
+        }`}
+      onClick={() =>  animateNavigate(link)}>
       {title}
       {title !== 'EMOTree' && '↗'}
     </h2>

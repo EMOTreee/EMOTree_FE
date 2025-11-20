@@ -1116,7 +1116,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
 
       {activeItem && (
         <>
-          <InfiniteMenuTitle isMoving={isMoving} title={activeItem.title} />
+          <InfiniteMenuTitle isMoving={isMoving} title={activeItem.title} link={activeItem.link}/>
           <InfiniteMenuDescription isMoving={isMoving} description={activeItem.description} />
           {/* {activeItem.title !== 'EMOTree' && (
             <InfiniteMenuButton isMoving={isMoving} onClick={handleButtonClick} />
