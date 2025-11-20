@@ -37,6 +37,10 @@
     .transition-color-300 {
         transition: var(--transition-color-300-in-out);
     }
+    
+    .transition-all-300 {
+        transition: var(--transition-all-300-in-out);
+    }
 
     .no-scroll {
         scrollbar-width: none;
@@ -51,7 +55,16 @@
     --font-abel: 'Abel';
     --font-pretendard: 'Pretendard';
 
+    --color-gray: #DBDBDB;
+    --color-yellow: #EEEE81;
+    --color-orange: #EEC881;
+    --color-green: #B4EE81;
+    --color-blue: #81B4EE;
+    --color-purple: #C2B3F0;
+    
     --transition-color-300-in-out: color 300ms ease-in-out;
+
+    --transition-all-300-in-out: all 300ms ease-in-out;
 
     --shadow-0-4-20-0: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
 }
