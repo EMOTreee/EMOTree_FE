@@ -55,7 +55,8 @@
     --font-abel: 'Abel';
     --font-pretendard: 'Pretendard';
 
-    --color-gray: #DBDBDB;
+    --color-light-gray: #DBDBDB;
+    --color-gray: #505050;
     --color-yellow: #EEEE81;
     --color-orange: #EEC881;
     --color-green: #B4EE81;

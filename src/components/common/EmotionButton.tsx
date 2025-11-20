@@ -24,12 +24,12 @@ export default function EmotionButton({
   } as const satisfies Record<Emotion, string>;
 
   const EMOTION_ICON = {
-    RANDOM: <RandomIcon className={`w-5 h-5`} />,
-    HAPPY: <HappyIcon className={`w-5 h-5`} />,
-    SAD: <SadIcon className={`w-5 h-5`} />,
-    ANGRY: <AngryIcon className={`w-5 h-5`} />,
-    SURPRISE: <SurpriseIcon className={`w-5 h-5`} />,
-    ANXIETY: <AnxietyIcon className={`w-5 h-5`} />,
+    RANDOM: <RandomIcon className={`w-5 h-5 text-black`} />,
+    HAPPY: <HappyIcon className={`w-5 h-5 text-black`} />,
+    SAD: <SadIcon className={`w-5 h-5 text-black`} />,
+    ANGRY: <AngryIcon className={`w-5 h-5 text-black`} />,
+    SURPRISE: <SurpriseIcon className={`w-5 h-5 text-black`} />,
+    ANXIETY: <AnxietyIcon className={`w-5 h-5 text-black`} />,
   } as const satisfies Record<Emotion, React.ReactNode>;
 
   const COLOR = {
@@ -42,7 +42,7 @@ export default function EmotionButton({
   } as const satisfies Record<Emotion, string>;
 
   const BG_COLOR = {
-    RANDOM: "hover:bg-gray",
+    RANDOM: "hover:bg-light-gray",
     HAPPY: "hover:bg-yellow",
     SAD: "hover:bg-blue",
     ANGRY: "hover:bg-orange",
@@ -50,20 +50,11 @@ export default function EmotionButton({
     ANXIETY: "hover:bg-green",
   } as const satisfies Record<Emotion, string>;
 
-  const BORDER_COLOR = {
-    RANDOM: "border-gray",
-    HAPPY: "border-yellow",
-    SAD: "border-blue",
-    ANGRY: "border-orange",
-    SURPRISE: "border-purple",
-    ANXIETY: "border-green",
-  } as const satisfies Record<Emotion, string>;
-
   return (
     <div
       className={`w-fit h-fit rounded-[10px] px-5 py-2.5 flex flex-row items-center gap-2 transition-all-300 text-[16px] z-50 cursor-pointer 
-                  opacity-50 border ${BORDER_COLOR[emotion]} 
-                  hover:opacity-100 ${BG_COLOR[emotion]}`}
+                  opacity-50 border border-gray
+                  hover:opacity-100 ${BG_COLOR[emotion]} hover:text-gray`}
       onMouseOver={() => setBlobCursorColor(COLOR[emotion])}>
       {EMOTION_ICON[emotion]}
       <p>{EMOTION_LABELS[emotion]}</p>

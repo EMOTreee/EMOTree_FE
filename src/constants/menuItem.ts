@@ -3,7 +3,7 @@ export const items = [
     image: '/images/purple.png',
     link: '/express/expression',
     title: '감정 표현 트레이닝',
-    description: '내 감정을 솔직하면서도 자연스럽게 전하는 연습을 통해, 편안한 소통의 리듬을 만들어 보세요. EMOTree는 당신이 자신만의 감정 언어를 찾도록 도와줍니다.'
+    description: '눈빛과 얼굴의 움직임을 통해 말로 하지 않아도 감정을 표현하는 법을 익혀보세요. EMOTree는 당신의 표정이 감정을 더 솔직하게 보여줄 수 있도록 돕습니다.'
   },
   {
     image: '/images/orange.png',
@@ -27,6 +27,6 @@ export const items = [
     image: '/images/green.png',
     link: '/express/voice',
     title: '감정 표현 트레이닝',
-    description: '내 감정을 솔직하면서도 자연스럽게 전하는 연습을 통해, 편안한 소통의 리듬을 만들어 보세요. EMOTree는 당신이 자신만의 감정 언어를 찾도록 도와줍니다.'
+    description: '목소리에 담긴 높낮이와 떨림, 속도 같은 작은 변화들을 활용해 내 감정을 자연스럽게 전달하는 연습을 해보세요. EMOTree는 당신의 목소리가 마음을 더 부드럽게 전하도록 도와줍니다.'
   }
 ];

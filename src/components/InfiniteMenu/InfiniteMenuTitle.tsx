@@ -31,9 +31,15 @@ const InfiniteMenuTitle = ({
           ? 'opacity-0 pointer-events-none duration-100ms'
           : 'opacity-100 pointer-events-auto duration-500ms'
         }`}
-      onClick={() =>  animateNavigate(link)}>
-      {title}
-      {title !== 'EMOTree' && '↗'}
+      onClick={() => animateNavigate(link)}>
+      <p>{title}{title !== 'EMOTree' && '↗'}</p>
+      {title === '감정 표현 트레이닝' && (
+        <>
+          <p className={`text-[20px] font-semibold text-center pr-4`}>
+            {link === '/express/expression' ? '- 표정 -' : '- 음성 -'}
+          </p>
+        </>
+      )}
     </h2>
   )
 }
