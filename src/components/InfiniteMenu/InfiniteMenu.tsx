@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
 import InfiniteMenuTitle from './InfiniteMenuTitle';
 import InfiniteMenuDescription from './InfiniteMenuDescription';
+import useBlobCursorStore from '../../stores/useBlobCursorStore';
+import { ITEMS } from '../../constants/menuItem';
 
 const discVertShaderSource = `#version 300 es
 
@@ -433,8 +435,6 @@ function createAndSetupTexture(
   return texture;
 }
 
-type UpdateCallback = (deltaTime: number) => void;
-
 class ArcballControl {
   private canvas: HTMLCanvasElement;
   private updateCallback: UpdateCallback;
@@ -574,32 +574,6 @@ class ArcballControl {
     }
     return vec3.fromValues(-x, y, z);
   }
-}
-
-interface MenuItem {
-  image: string;
-  link: string;
-  title: string;
-  description: string;
-}
-
-type ActiveItemCallback = (index: number) => void;
-type MovementChangeCallback = (isMoving: boolean) => void;
-type InitCallback = (instance: InfiniteGridMenu) => void;
-
-interface Camera {
-  matrix: mat4;
-  near: number;
-  far: number;
-  fov: number;
-  aspect: number;
-  position: vec3;
-  up: vec3;
-  matrices: {
-    view: mat4;
-    projection: mat4;
-    inversProjection: mat4;
-  };
 }
 
 class InfiniteGridMenu {
@@ -1030,17 +1004,14 @@ const defaultItems: MenuItem[] = [
     image: 'https://picsum.photos/900/900?grayscale',
     link: 'https://google.com/',
     title: '',
-    description: ''
+    description: '',
+    color: 'DBDBDB'
   }
 ];
 
-interface InfiniteMenuProps {
-  items?: MenuItem[];
-}
-
 const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
+  const [activeItem, setActiveItem] = useState<MenuItem>(ITEMS[0]);
   const [isMoving, setIsMoving] = useState<boolean>(false);
 
   useEffect(() => {
@@ -1090,14 +1061,13 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
-  // const handleButtonClick = () => {
-  //   if (!activeItem?.link) return;
-  //   if (activeItem.link.startsWith('http')) {
-  //     // window.open(activeItem.link, '_blank');
-  //   } else {
-  //     console.log('Internal route:', activeItem.link);
-  //   }
-  // };
+  const {
+    setBlobCursorColor,
+  } = useBlobCursorStore();
+
+  useEffect(() => {
+    setBlobCursorColor(activeItem.color);
+  }, [activeItem]);
 
   return (
     <div className="relative w-full h-full">
@@ -1118,9 +1088,6 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
         <>
           <InfiniteMenuTitle isMoving={isMoving} title={activeItem.title} link={activeItem.link}/>
           <InfiniteMenuDescription isMoving={isMoving} description={activeItem.description} />
-          {/* {activeItem.title !== 'EMOTree' && (
-            <InfiniteMenuButton isMoving={isMoving} onClick={handleButtonClick} />
-          )} */}
         </>
       )}
     </div>

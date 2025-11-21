@@ -17,7 +17,7 @@ const InfiniteMenuTitle = ({
   return (
     <h2
       className={`
-          ${title === 'EMOTree' ? 'font-abel text-[4rem]' : 'text-[2rem] font-bold cursor-pointer'}
+          ${title === 'EMOTree' ? 'font-abel text-[4rem]' : 'text-[2rem] font-bold'}
           select-none
           absolute
           top-1/2
@@ -27,15 +27,16 @@ const InfiniteMenuTitle = ({
           transform
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          hover:text-hover-gray
           ${isMoving
           ? 'opacity-0 pointer-events-none duration-100ms'
           : 'opacity-100 pointer-events-auto duration-500ms'
         }`}
       onClick={() => animateNavigate(link)}>
-      <p>{title}{title !== 'EMOTree' && '↗'}</p>
+      <p className={`transition-color-300`}>{title}{title !== 'EMOTree' && '↗'}</p>
       {title === '감정 표현 트레이닝' && (
         <>
-          <p className={`text-[20px] font-semibold text-center pr-4`}>
+          <p className={`text-[20px] font-semibold text-center pr-4 transition-color-300`}>
             {link === '/express/expression' ? '- 표정 -' : '- 음성 -'}
           </p>
         </>

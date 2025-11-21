@@ -107,11 +107,11 @@ export default function BlobCursor({
       ref={containerRef}
       onMouseMove={handleMove}
       onTouchMove={handleMove}
-      className="relative top-0 left-0 w-full h-full opacity-60 pointer-events-none"
+      className="pointer-events-none select-none relative top-0 left-0 w-full h-full opacity-60"
       style={{ zIndex }}
     >
       {useFilter && (
-        <svg className="absolute w-0 h-0">
+        <svg className="pointer-events-none select-none absolute w-0 h-0 transition-color-300">
           <filter id={filterId}>
             <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation={filterStdDeviation} />
             <feColorMatrix in="blur" values={filterColorMatrixValues} />
@@ -120,7 +120,7 @@ export default function BlobCursor({
       )}
 
       <div
-        className="pointer-events-none absolute inset-0 overflow-hidden select-none cursor-default"
+        className="pointer-events-none select-none absolute inset-0 overflow-hidden transition-color-300"
         style={{ filter: useFilter ? `url(#${filterId})` : undefined }}
       >
         {Array.from({ length: trailCount }).map((_, i) => (
@@ -129,7 +129,7 @@ export default function BlobCursor({
             ref={el => {
               blobsRef.current[i] = el;
             }}
-            className="absolute will-change-transform transform -translate-x-1/2 -translate-y-1/2 transition-color-300"
+            className="pointer-events-none select-none absolute will-change-transform transform -translate-x-1/2 -translate-y-1/2 transition-color-300"
             style={{
               width: sizes[i],
               height: sizes[i],
@@ -140,7 +140,7 @@ export default function BlobCursor({
             }}
           >
             <div
-              className="absolute"
+              className="pointer-events-none select-none absolute transition-color-300"
               style={{
                 width: innerSizes[i],
                 height: innerSizes[i],

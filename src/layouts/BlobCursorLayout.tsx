@@ -1,9 +1,8 @@
-import { Outlet } from "react-router-dom";
 import BlobCursor from "../components/common/BlobCursor";
-import useBlobCursorStore from "../stores/useblobCursorStore";
+import useBlobCursorStore from "../stores/useBlobCursorStore";
 import { useEffect } from "react";
 import AnimateContainer from "../components/common/AnimateContainer";
-import { motion } from "framer-motion";
+import Motion from "../components/motion/Motion";
 
 export default function BlobCursorLayout() {
 
@@ -20,14 +19,9 @@ export default function BlobCursorLayout() {
 
   return (
     <AnimateContainer>
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="flex h-screen flex-col relative">
-        <Outlet />
-        <div className={`absolute h-screen w-screen -z-10`}>
+      <Motion.div 
+        className="flex h-screen flex-col absolute">
+        <div className={`absolute h-screen w-screen`}>
           <BlobCursor
             blobType="circle"
             fillColor={blobCursorColor}
@@ -44,10 +38,10 @@ export default function BlobCursorLayout() {
             useFilter={true}
             fastDuration={0.1}
             slowDuration={0.5}
-            zIndex={0}
+            zIndex={200}
           />
         </div>
-      </motion.div>
+      </Motion.div>
     </AnimateContainer>
   )
 }

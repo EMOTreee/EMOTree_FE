@@ -14,13 +14,15 @@ const InfiniteMenuDescription = ({
           select-none
           absolute
           w-[15%]
-          text-[16px]
+          text-[18px]
           top-1/2
           -translate-y-1/2
           right-1/6
           translate-x-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          text-center
+          text-gray
           ${isMoving
           ? 'opacity-0 pointer-events-none duration-100ms'
           : 'opacity-100 pointer-events-auto duration-500ms'
