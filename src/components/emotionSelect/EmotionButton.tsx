@@ -1,5 +1,5 @@
 import type React from "react";
-import { AngryIcon, AnxietyIcon, HappyIcon, RandomIcon, SadIcon, SurpriseIcon } from "../../assets";
+import { AngryIcon, AnxietyIcon, JoyIcon, RandomIcon, SadnessIcon, SurpriseIcon } from "../../assets";
 import useBlobCursorStore from "../../stores/useBlobCursorStore";
 
 type EmotionButtonProps = {
@@ -22,8 +22,8 @@ export default function EmotionButton({
 
   const EMOTION_LABELS = {
     RANDOM: "랜덤",
-    HAPPY: "기쁨",
-    SAD: "슬픔",
+    JOY: "기쁨",
+    SADNESS: "슬픔",
     ANGRY: "분노",
     SURPRISE: "놀람",
     ANXIETY: "불안",
@@ -31,8 +31,8 @@ export default function EmotionButton({
 
   const EMOTION_ICON = {
     RANDOM: <RandomIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
-    HAPPY: <HappyIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
-    SAD: <SadIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
+    JOY: <JoyIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
+    SADNESS: <SadnessIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
     ANGRY: <AngryIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
     SURPRISE: <SurpriseIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
     ANXIETY: <AnxietyIcon className={`w-5 h-5 text-black`} onClick={onClick}/>,
@@ -40,8 +40,8 @@ export default function EmotionButton({
 
   const COLOR = {
     RANDOM: "#DBDBDB",
-    HAPPY: "#EEEE81",
-    SAD: "#81B4EE",
+    JOY: "#EEEE81",
+    SADNESS: "#81B4EE",
     ANGRY: "#EEC881",
     SURPRISE: "#C2B3F0",
     ANXIETY: "#B4EE81",
@@ -49,8 +49,8 @@ export default function EmotionButton({
 
   const BG_COLOR = {
     RANDOM: "bg-light-gray",
-    HAPPY: "bg-yellow",
-    SAD: "bg-blue",
+    JOY: "bg-yellow",
+    SADNESS: "bg-blue",
     ANGRY: "bg-orange",
     SURPRISE: "bg-purple",
     ANXIETY: "bg-green",

@@ -16,8 +16,8 @@ export default function EmotionSelect({
 
   const EmotionList = [
     ...(enableRandom ? ["RANDOM"] : []),
-    "HAPPY",
-    "SAD",
+    "JOY",
+    "SADNESS",
     "ANGRY",
     "SURPRISE",
     "ANXIETY"
