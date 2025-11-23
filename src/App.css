@@ -16,9 +16,13 @@
     src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
+rect{
+    cursor: none !important;
+}
+
 :root {
     font-family: "Pretendard";
-    cursor: none;
+    cursor: none !important;
 }
 
 @layer components {
@@ -50,6 +54,10 @@
     .shadow-0-4-20-0 {
         box-shadow: var(--shadow-0-4-20-0);
     }
+
+    .shadow-0-2-4-0 {
+        box-shadow: var(--shadow-0-2-4-0);
+    }
 }
 
 @theme {
@@ -71,4 +79,5 @@
     --transition-all-300-in-out: all 300ms ease-in-out;
 
     --shadow-0-4-20-0: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    --shadow-0-2-4-0: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
