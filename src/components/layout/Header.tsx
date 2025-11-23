@@ -52,7 +52,7 @@ const Header = () => {
             className={`flex flex-row gap-4`}>
             <p
               className={`text-[14px] hover:text-hover-gray transition-all-300 font-medium`}
-              onClick={() => { }}>마이페이지</p>
+              onClick={() => animateNavigate('/mypage')}>마이페이지</p>
             <p
               className={`text-[14px] hover:text-hover-gray transition-all-300 font-medium`}
               onClick={handleLogOut}>로그아웃</p>
