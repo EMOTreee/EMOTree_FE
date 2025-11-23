@@ -3,7 +3,7 @@ import axiosInstance from "./axiosInstance"
 const apiUrl = import.meta.env.VITE_API_URL
 
 export const getUserRequest = async () => {
-  const { data } = await axiosInstance.get(`${apiUrl}/auth/user`)
+  const { data } = await axiosInstance.get(`${apiUrl}/users/me`)
 
   return {
     name: data?.nickname ?? null,
