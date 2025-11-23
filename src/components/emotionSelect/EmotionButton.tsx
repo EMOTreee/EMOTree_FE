@@ -8,6 +8,7 @@ type EmotionButtonProps = {
   onClick: () => void
   enteredEmotion: Emotion | null
   setEnteredEmotion: React.Dispatch<React.SetStateAction<Emotion>>
+  isTransitioning?: boolean
 }
 
 export default function EmotionButton({
@@ -15,6 +16,7 @@ export default function EmotionButton({
   onClick,
   enteredEmotion,
   setEnteredEmotion,
+  isTransitioning,
 }: EmotionButtonProps) {
 
   const {
@@ -31,6 +33,8 @@ export default function EmotionButton({
   } as const satisfies Record<Emotion, string>;
 
   const handleMouseEnter = () => {
+    if (isTransitioning) return;
+
     setEnteredEmotion(emotion)
     setBlobCursorColor(EMOTION_COLORS[emotion])
   }

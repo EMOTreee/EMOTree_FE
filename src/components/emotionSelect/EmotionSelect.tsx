@@ -1,17 +1,21 @@
 import EmotionButton from "./EmotionButton"
 import Motion from "../motion/Motion"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import useBlobCursorStore from "../../stores/useBlobCursorStore"
+import { EMOTION_COLORS } from "../../constants/emotion"
 
 type EmotionSelectProps = {
   handleEmotionSelect: (emotion: Emotion | null) => void
   title: string
   enableRandom?: boolean
+  isTransitioning?: boolean
 }
 
 export default function EmotionSelect({
   handleEmotionSelect,
   title,
   enableRandom,
+  isTransitioning,
 }: EmotionSelectProps) {
 
   const EmotionList = [
@@ -23,10 +27,19 @@ export default function EmotionSelect({
     "ANXIETY"
   ] as Emotion[]
 
+  const {
+    setBlobCursorColor
+  } = useBlobCursorStore();
+
   const [enteredEmotion, setEnteredEmotion] = useState<Emotion>('RANDOM');
+
+  useEffect(() => {
+    setBlobCursorColor(EMOTION_COLORS['RANDOM'])
+  }, [])
 
   return (
     <Motion.div
+      key={'emotion-select'}
       className={`h-full pt-20 pb-20 flex flex-col items-center justify-center gap-10`}>
       <p className={`text-[32px] font-semibold select-none`}>{title}</p>
       <div className={`flex flex-row ${enableRandom ? `gap-5` : `gap-10`}`}>
@@ -36,7 +49,8 @@ export default function EmotionSelect({
               emotion={emotion as Emotion} 
               onClick={() => handleEmotionSelect(emotion)} 
               enteredEmotion={enteredEmotion} 
-              setEnteredEmotion={setEnteredEmotion} />
+              setEnteredEmotion={setEnteredEmotion} 
+              isTransitioning={isTransitioning}/>
           </div>
         ))}
       </div>
