@@ -5,3 +5,13 @@ export { default as SadnessIcon } from './sadness.svg?react';
 export { default as AngryIcon } from './angry.svg?react';
 export { default as AnxietyIcon } from './anxiety.svg?react';
 export { default as SurpriseIcon } from './surprise.svg?react';
+
+export { default as BackspaceIcon } from './backspace.svg?react';
+export { default as RetryIcon } from './retry.svg?react';
+export { default as HomeIcon } from './home.svg?react';
+export { default as ImageIcon } from './image.svg?react';
+export { default as CameraIcon } from './camera.svg?react';
+export { default as HeadphoneIcon } from './headphone.svg?react';
+export { default as MicrophoneIcon } from './microphone.svg?react';
+export { default as StartIcon } from './start.svg?react';
+export { default as StopIcon } from './stop.svg?react';
