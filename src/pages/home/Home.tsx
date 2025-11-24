@@ -1,7 +1,7 @@
-import InfiniteMenu from "../../components/infiniteMenu/InfiniteMenu";
 import { ITEMS } from "../../constants/menuItem";
 import AnimateContainer from "../../components/common/AnimateContainer";
 import Motion from "../../components/motion/Motion";
+import InfiniteMenu from "./components/InfiniteMenu";
 
 export default function Home() {
 

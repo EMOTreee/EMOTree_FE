@@ -1,4 +1,4 @@
-import useAnimateNavigate from "../../hooks/useAnimateNavigate";
+import useAnimateNavigate from "../../../hooks/useAnimateNavigate";
 
 type InfiniteMenuTitleProps = {
   isMoving: boolean;

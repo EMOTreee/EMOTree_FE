@@ -3,8 +3,8 @@ import type { FC } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
 import InfiniteMenuTitle from './InfiniteMenuTitle';
 import InfiniteMenuDescription from './InfiniteMenuDescription';
-import useBlobCursorStore from '../../stores/useBlobCursorStore';
-import { ITEMS } from '../../constants/menuItem';
+import { ITEMS } from '../../../constants/menuItem';
+import useBlobCursorStore from '../../../stores/useBlobCursorStore';
 
 const discVertShaderSource = `#version 300 es
 
