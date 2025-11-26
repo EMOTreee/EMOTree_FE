@@ -16,12 +16,12 @@
     src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
-rect{
+:root {
+    font-family: "Pretendard";
     cursor: none !important;
 }
 
-:root {
-    font-family: "Pretendard";
+rect {
     cursor: none !important;
 }
 
@@ -42,7 +42,7 @@ rect{
     .transition-color-300 {
         transition: var(--transition-color-300-in-out);
     }
-    
+
     .transition-all-300 {
         transition: var(--transition-all-300-in-out);
     }
@@ -73,7 +73,7 @@ rect{
     --color-blue: #81B4EE;
     --color-purple: #C2B3F0;
     --color-logo-green: #6FB936;
-    
+
     --transition-color-300-in-out: color 300ms ease-in-out, background-color 300ms ease-in-out;
 
     --transition-all-300-in-out: all 300ms ease-in-out;
