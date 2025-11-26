@@ -15,3 +15,5 @@ export { default as HeadphoneIcon } from './headphone.svg?react';
 export { default as MicrophoneIcon } from './microphone.svg?react';
 export { default as StartIcon } from './start.svg?react';
 export { default as StopIcon } from './stop.svg?react';
+
+export { default as DragImage } from './drag_image.svg?react';
