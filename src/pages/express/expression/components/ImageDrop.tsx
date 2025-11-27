@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { DragImage } from "../../../../assets";
 import Motion from "../../../../components/motion/Motion";
 import { useResponsiveSize } from "../../../../hooks/useResponiveSize";

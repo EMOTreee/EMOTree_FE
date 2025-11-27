@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Motion from "../../../../components/motion/Motion";
 import { AnimatePresence } from "framer-motion";
 import { CameraIcon } from "../../../../assets";

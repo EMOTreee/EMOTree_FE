@@ -1,4 +1,3 @@
-import { AutoHeightTextarea } from "autogrow-input";
 import { useEffect, useState } from "react";
 
 type TypingTextProps = {

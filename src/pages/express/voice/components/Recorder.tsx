@@ -2,7 +2,6 @@ import { BounceLoader } from "react-spinners";
 import Motion from "../../../../components/motion/Motion";
 import { EMOTION_COLORS } from "../../../../constants/emotion";
 import { MicrophoneIcon, StartIcon, StopIcon } from "../../../../assets";
-import { useEffect, useState } from "react";
 import ExpressTitle from "../../components/ExpressTitle";
 import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
 
