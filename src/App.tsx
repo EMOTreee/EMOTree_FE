@@ -6,6 +6,7 @@ import Interpret from "./pages/interpret/Interpret"
 import Empathy from "./pages/empathy/Empathy"
 import Mypage from "./pages/mypage/Mypage"
 import Voice from "./pages/express/voice/Voice"
+import Expression from "./pages/express/expression/Expression"
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         </Route>
         <Route path="express/*">
           <Route path="voice" element={<Voice />} />
-          <Route path="expression" element={<></>} />
+          <Route path="expression" element={<Expression />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
