@@ -97,6 +97,8 @@ export default function CameraCapture({
       setImageUrl(url);
 
     }, "image/png");
+
+    videoRef.current = null
   };
 
   return (
