@@ -90,14 +90,15 @@ export default function AnalyzeExpression({
       <AnimatePresence mode="wait">
         {currentMode === 'CAMERA' ? (
           <CameraCapture
+            key={'camera'}
             setCurrentMode={setCurrentMode}
             setHasCamera={setHasCamera}
-            imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             photo={photo}
             setPhoto={setPhoto} />
         ) : (
           <ImageDrop
+            key={'image'}
             imageUrl={imageUrl}
             setImageUrl={setImageUrl} />
         )}

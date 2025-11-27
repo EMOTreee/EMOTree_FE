@@ -7,7 +7,6 @@ import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
 type CameraCaptureProps = {
   setCurrentMode: React.Dispatch<React.SetStateAction<"CAMERA" | "IMAGE">>
   setHasCamera: React.Dispatch<React.SetStateAction<boolean>>
-  imageUrl: string | null
   setImageUrl: React.Dispatch<React.SetStateAction<string | null>>
   photo: string | null
   setPhoto: React.Dispatch<React.SetStateAction<string | null>>
@@ -16,7 +15,6 @@ type CameraCaptureProps = {
 export default function CameraCapture({
   setCurrentMode,
   setHasCamera,
-  imageUrl,
   setImageUrl,
   photo,
   setPhoto,
@@ -26,49 +24,34 @@ export default function CameraCapture({
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const photoRef = useRef<HTMLCanvasElement>(null);
-
+  const streamRef = useRef<MediaStream>(null);
+  const intervalRef = useRef<number | null>(null);
   useEffect(() => {
-    let stream: MediaStream | null = null;
-    let intervalId: number;
+    if (photo) return;
 
-    const connectCamera = async () => {
-      try {
-        if (!videoRef.current) {
-          intervalId = setInterval(async () => {
-            if (videoRef.current) {
-              clearInterval(intervalId);
+    intervalRef.current = window.setInterval(async () => {
+      if (videoRef.current) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
 
-              stream = await navigator.mediaDevices.getUserMedia({
-                video: true,
-                audio: false,
-              });
-
-              videoRef.current.srcObject = stream;
-            }
-          }, 100);
-        } else {
-          stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false,
-          });
-          setHasCamera(true);
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          streamRef.current = stream;
           videoRef.current.srcObject = stream;
+          setHasCamera(true);
+        } catch (e) {
+          alert(e);
+          setHasCamera(false);
+          setCurrentMode("IMAGE");
         }
-      } catch(e) {
-        alert(e)
-        setHasCamera(false);
-        setCurrentMode("IMAGE");
       }
-    };
-
-    connectCamera();
+    }, 100);
 
     return () => {
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop())
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop())
       }
     }
-  }, [photo, imageUrl, videoRef]);
+  }, [photo]);
 
   const handleCapture = () => {
     if (!videoRef.current || !photoRef.current) {
@@ -96,9 +79,15 @@ export default function CameraCapture({
       setPhoto(url);
       setImageUrl(url);
 
-    }, "image/png");
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop())
+        streamRef.current = null;
+      }
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
 
-    videoRef.current = null
+    }, "image/png");
   };
 
   return (
