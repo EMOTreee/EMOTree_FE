@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { CameraIcon, ImageIcon } from "../../../../assets";
-import { EmotionIcon } from "../../../../components/common/EmotionIcons";
 import Motion from "../../../../components/motion/Motion";
-import { BG_COLOR, EMOTION_COLORS, EMOTION_LABELS, EMOTION_PARTICLE } from "../../../../constants/emotion";
+import { BG_COLOR, EMOTION_COLORS } from "../../../../constants/emotion";
 import CameraCapture from "./CameraCapture";
 import { AnimatePresence, motion } from "framer-motion";
 import ImageDrop from "./ImageDrop";
@@ -11,12 +10,15 @@ import { getAnalyzeExpressionResponse } from "../../../../apis/emotion";
 import { HashLoader } from 'react-spinners';
 import Navigator from "../../../../components/common/Navigator";
 import TypingText from "../../../../components/common/TypingText";
+import ExpressTitle from "../../components/ExpressTitle";
 
 type AnalyzeExpressionProps = {
   selectedEmotion: Emotion
   setSelectedEmotion: React.Dispatch<React.SetStateAction<Emotion | null>>
   currentMode: 'CAMERA' | 'IMAGE'
   setCurrentMode: React.Dispatch<React.SetStateAction<"CAMERA" | "IMAGE">>
+  hasCamera: boolean
+  setHasCamera: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function AnalyzeExpression({
@@ -24,9 +26,10 @@ export default function AnalyzeExpression({
   setSelectedEmotion,
   currentMode,
   setCurrentMode,
+  hasCamera,
+  setHasCamera,
 }: AnalyzeExpressionProps) {
 
-  const [hasCamera, setHasCamera] = useState(true);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
@@ -64,16 +67,16 @@ export default function AnalyzeExpression({
   }, [imageUrl])
 
   const handleBackspace = () => {
-    setImageUrl(null)
-    setPhoto(null)
     setFeedback(null)
+    setPhoto(null)
+    setImageUrl(null)
+    setSelectedEmotion(null)
   }
 
   const handleRetry = () => {
-    setImageUrl(null)
-    setPhoto(null)
     setFeedback(null)
-    setSelectedEmotion(null)
+    setPhoto(null)
+    setImageUrl(null)
   }
 
   useEffect(() => {
@@ -83,7 +86,7 @@ export default function AnalyzeExpression({
   }, [currentMode])
 
   return (
-    <Motion.div className={`w-full h-full pt-20 pb-20 flex flex-col items-center justify-center gap-10 z-1`}>
+    <Motion.div className={`w-full h-full responsive-p-t pb-20 flex flex-col items-center justify-center gap-10 max-md:gap-20 z-1`}>
       <AnimatePresence mode="wait">
         {currentMode === 'CAMERA' ? (
           <CameraCapture
@@ -103,20 +106,15 @@ export default function AnalyzeExpression({
       <AnimatePresence mode="wait">
         {!isPending && !feedback ? (
           <motion.div className={`flex flex-col gap-5 items-center h-[110px]`}>
-            <div className={`flex flex-row gap-2 items-center text-gray text-[28px]`}>
-              <EmotionIcon emotion={selectedEmotion} className={`w-8 h-8`} />
-              <p className={`select-none`}>
-                <span className={`font-bold`}>{EMOTION_LABELS[selectedEmotion]}</span>{EMOTION_PARTICLE[selectedEmotion]} 포현해 보세요
-              </p>
-            </div>
+            <ExpressTitle selectedEmotion={selectedEmotion}/>
             <div className={`flex flex-row gap-5 items-center select-none`}>
               {hasCamera &&
                 <CameraIcon
-                  className={`${currentMode === 'CAMERA' ? `text-gray` : `text-light-gray`} w-12 h-12 transition-all-300 hover:text-gray`}
+                  className={`${currentMode === 'CAMERA' ? `text-gray` : `text-light-gray`} w-12 h-12 max-lg:w-11 max-lg:h-11 max-md:w-10 max-md:h-10 transition-all-300 hover:text-gray`}
                   onMouseEnter={() => handleMouseEnter('CAMERA')} />
               }
               <ImageIcon
-                className={`${currentMode === 'CAMERA' ? `text-light-gray` : `text-gray`} w-12 h-12 transition-all-300 hover:text-gray`}
+                className={`${currentMode === 'CAMERA' ? `text-light-gray` : `text-gray`} w-12 h-12 max-lg:w-11 max-lg:h-11 max-md:w-10 max-md:h-10 transition-all-300 hover:text-gray`}
                 onMouseEnter={() => handleMouseEnter('IMAGE')} />
             </div>
           </motion.div>
@@ -133,7 +131,7 @@ export default function AnalyzeExpression({
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ opacity: 0, height: 110 }}
                   transition={{ duration: 0.3 }}
-                  className={`${BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] w-[40vw] overflow-auto no-scroll`}>
+                  className={`${BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
                   <TypingText text={feedback} />
                 </motion.div>
                 <Navigator

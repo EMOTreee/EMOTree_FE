@@ -36,7 +36,7 @@ export default function Empathy() {
       {selectedEmotion !== null && (
         <Motion.div
           key="empathy-content"
-          className={`h-full pt-20 pb-20 flex flex-col items-center justify-center gap-10`}>
+          className={`h-full responsive-p-t pb-20 flex flex-col items-center justify-center gap-10`}>
           <p className={`text-[24px] font-semibold`}>선택한 감정: {selectedEmotion}</p>
         </Motion.div>
       )}

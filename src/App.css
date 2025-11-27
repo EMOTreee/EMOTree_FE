@@ -47,6 +47,10 @@ rect {
         transition: var(--transition-all-300-in-out);
     }
 
+    .transition-height-300 {
+        transition: var(--transition-height-300-in-out);
+    }
+
     .no-scroll {
         scrollbar-width: none;
     }
@@ -57,6 +61,14 @@ rect {
 
     .shadow-0-2-4-0 {
         box-shadow: var(--shadow-0-2-4-0);
+    }
+
+    .responsive-p-t {
+        padding-top: 80px;
+
+        @media (max-width: 768px) {
+            padding-top: 64px;
+        }
     }
 }
 
@@ -80,4 +92,6 @@ rect {
 
     --shadow-0-4-20-0: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
     --shadow-0-2-4-0: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    --transition-height-300-in-out: height 300ms ease-in-out;
 }

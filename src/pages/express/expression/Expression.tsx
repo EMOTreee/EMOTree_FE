@@ -7,6 +7,7 @@ export default function Expression() {
 
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [hasCamera, setHasCamera] = useState(true);
 
   const [currentMode, setCurrentMode] = useState<'CAMERA' | 'IMAGE'>('CAMERA');
 
@@ -32,7 +33,9 @@ export default function Expression() {
           selectedEmotion={selectedEmotion}
           setSelectedEmotion={setSelectedEmotion}
           currentMode={currentMode}
-          setCurrentMode={setCurrentMode}/>
+          setCurrentMode={setCurrentMode}
+          hasCamera={hasCamera}
+          setHasCamera={setHasCamera}/>
       )}
     </EmotionSelectWrapper>
   )

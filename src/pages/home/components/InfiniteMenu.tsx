@@ -1073,6 +1073,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     <div className="relative w-full h-full">
       <canvas
         ref={canvasRef}
+        className={`max-sm:scale-150`}
         style={{
           position: 'fixed',
           top: 0,

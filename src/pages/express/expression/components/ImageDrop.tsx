@@ -1,6 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DragImage } from "../../../../assets";
 import Motion from "../../../../components/motion/Motion";
+import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
 
 type ImageDropProps = {
   imageUrl: string | null
@@ -10,7 +11,10 @@ type ImageDropProps = {
 export default function ImageDrop({
   imageUrl,
   setImageUrl,
-}: ImageDropProps ) {
+}: ImageDropProps) {
+
+  const size = useResponsiveSize(0.4, 250, 400)
+
   const [isDragging, setIsDragging] = useState(false);
 
   const handleFiles = useCallback((files: FileList | null) => {
@@ -22,13 +26,17 @@ export default function ImageDrop({
   }, [setImageUrl]);
 
   return (
-    <Motion.div key={'IMAGE'}>
+    <Motion.div key={'IMAGE'} className={`flex justify-center items-center`}>
 
       {imageUrl ? (
-        <img src={imageUrl} className={`object-cover w-[400px] h-[400px] rounded-full`} />
+        <img
+          src={imageUrl}
+          className={`object-cover aspect-square rounded-full`}
+          style={{ width: size, height: size }} />
       ) : (
         <DragImage
-          className={`w-[400px] h-[400px] ${isDragging ? "text-gray" : "text-light-gray"} hover:text-gray transition-all-300`}
+          className={`aspect-square ${isDragging ? "text-gray" : "text-light-gray"} hover:text-gray transition-all-300`}
+          style={{ width: size, height: size }}
           onDragOver={(e) => {
             e.preventDefault();
             setIsDragging(true);
@@ -46,7 +54,7 @@ export default function ImageDrop({
         type="file"
         accept="image/*"
         className={`hidden`}
-        onChange={(e) => handleFiles(e.target.files)}/>
+        onChange={(e) => handleFiles(e.target.files)} />
     </Motion.div>
   )
 }

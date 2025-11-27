@@ -40,11 +40,11 @@ export default function EmotionSelect({
   return (
     <Motion.div
       key={'emotion-select'}
-      className={`h-full pt-20 pb-20 flex flex-col items-center justify-center gap-10`}>
-      <p className={`text-[32px] font-semibold select-none`}>{title}</p>
-      <div className={`flex flex-row ${enableRandom ? `gap-5` : `gap-10`}`}>
+      className={`h-full responsive-p-t pb-20 flex flex-col items-center justify-center gap-10`}>
+      <p className={`text-[32px] max-md:text-[28px] max-sm:text-[24px] font-semibold select-none transition-all-300`}>{title}</p>
+      <div className={`flex flex-row flex-wrap justify-center ${enableRandom ? `` : `lg:gap-10`} gap-5 max-sm:px-10 transition-all-300`}>
         {EmotionList.map((emotion) => (
-          <div key={emotion} className={`mb-5`}>
+          <div key={emotion} className={`md:mb-5`}>
             <EmotionButton 
               emotion={emotion as Emotion} 
               onClick={() => handleEmotionSelect(emotion)} 

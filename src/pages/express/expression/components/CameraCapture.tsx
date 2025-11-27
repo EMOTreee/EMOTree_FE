@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Motion from "../../../../components/motion/Motion";
 import { AnimatePresence } from "framer-motion";
 import { CameraIcon } from "../../../../assets";
+import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
 
 type CameraCaptureProps = {
   setCurrentMode: React.Dispatch<React.SetStateAction<"CAMERA" | "IMAGE">>
@@ -21,12 +22,14 @@ export default function CameraCapture({
   setPhoto,
 }: CameraCaptureProps) {
 
+  const size = useResponsiveSize(0.4, 250, 400)
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const photoRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
-  let intervalId: number;
+    let intervalId: number;
 
     const connectCamera = async () => {
       try {
@@ -48,7 +51,7 @@ export default function CameraCapture({
             video: true,
             audio: false,
           });
-
+          setHasCamera(true);
           videoRef.current.srcObject = stream;
         }
       } catch {
@@ -96,17 +99,17 @@ export default function CameraCapture({
   };
 
   return (
-    <Motion.div key={'CAMERA'} className={`w-[400px] h-[400px] rounded-full select-none`}>
+    <Motion.div key={'CAMERA'} className={`rounded-full select-none transition-all-300`} style={{ width: size, height: size }}>
       <AnimatePresence mode="wait">
         {!photo ? (
-          <Motion.div key={'video'} className={`relative`}>
+          <Motion.div key={'video'} className={`relative w-full h-full`}>
             <video
               ref={videoRef}
               autoPlay
               playsInline
-              className={`w-[400px] h-[400px] object-cover rounded-full`} />
+              className={`w-full h-full object-cover rounded-full`} />
             <div
-              className={`w-[400px] h-[400px] rounded-full hover:opacity-30 opacity-0 bg-white absolute top-0 left-0 transition-all-300 flex justify-center items-center`}
+              className={`w-full h-full rounded-full hover:opacity-30 opacity-0 bg-white absolute top-0 left-0 transition-all-300 flex justify-center items-center`}
               onClick={handleCapture} >
               <CameraIcon className={`w-20 h-20 text-gray`} />
             </div>
@@ -116,7 +119,10 @@ export default function CameraCapture({
           </Motion.div>
         ) : (
           <Motion.div key={'image'}>
-            <img src={photo} className={`w-[400px] h-[400px] object-cover rounded-full pointer-events-none`} />
+            <img
+              src={photo}
+              className={`object-cover rounded-full pointer-events-none`}
+            />
           </Motion.div>
         )}
       </AnimatePresence>
