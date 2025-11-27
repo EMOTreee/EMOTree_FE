@@ -118,10 +118,10 @@ export default function CameraCapture({
               className={`hidden`} />
           </Motion.div>
         ) : (
-          <Motion.div key={'image'}>
+          <Motion.div key={'image'} className={`w-full h-full`}>
             <img
               src={photo}
-              className={`object-cover rounded-full pointer-events-none`}
+              className={`object-cover rounded-full aspect-square pointer-events-none`}
             />
           </Motion.div>
         )}
