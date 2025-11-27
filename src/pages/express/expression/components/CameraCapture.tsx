@@ -54,7 +54,8 @@ export default function CameraCapture({
           setHasCamera(true);
           videoRef.current.srcObject = stream;
         }
-      } catch {
+      } catch(e) {
+        alert(e)
         setHasCamera(false);
         setCurrentMode("IMAGE");
       }
