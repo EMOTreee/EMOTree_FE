@@ -3,9 +3,8 @@ import { useRef, useState } from "react";
 import EmotionSelect from "../../../components/emotionSelect/EmotionSelect";
 import Recorder from "./components/Recorder";
 import AudioPlayButton from "./components/AudioPlayButton";
-import { BackspaceIcon, HomeIcon, RetryIcon } from "../../../assets";
-import useAnimateNavigate from "../../../hooks/useAnimateNavigate";
 import EmotionSelectWrapper from "../../../components/emotionSelect/EmotionSelectWrapper";
+import Navigator from "../../../components/common/Navigator";
 
 export default function Voice() {
 
@@ -34,10 +33,6 @@ export default function Voice() {
     setAudioURL(null)
   }
 
-  const animateNavigate = useAnimateNavigate();
-
-  const iconStyle = `w-8 h-8 opacity-30 hover:opacity-100 transition-all-300`
-
   return (
     <EmotionSelectWrapper
       setIsTransitioning={setIsTransitioning}
@@ -59,11 +54,9 @@ export default function Voice() {
             setAudioURL={setAudioURL} />
         ) : (
           <Motion.div key={'listen'} className={`flex flex-col gap-10 z-1`}>
-            <div className={`flex flex-row gap-5`}>
-              <BackspaceIcon className={`${iconStyle}`} onClick={handleBackspace} />
-              <RetryIcon className={`${iconStyle}`} onClick={handleRetry} />
-              <HomeIcon className={`${iconStyle}`} onClick={() => animateNavigate('/')} />
-            </div>
+            <Navigator
+              handleBackspace={handleBackspace}
+              handleRetry={handleRetry}/>
             <AudioPlayButton audioURL={audioURL} />
           </Motion.div>
         )

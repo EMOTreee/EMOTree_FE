@@ -1,9 +1,7 @@
 import axiosInstance from "./axiosInstance"
 
-const apiUrl = import.meta.env.VITE_API_URL
-
-export const getUserRequest = async () => {
-  const { data } = await axiosInstance.get(`${apiUrl}/users/me`)
+export const getUserResponse = async () => {
+  const { data } = await axiosInstance.get(`/users/me`)
 
   return {
     name: data?.nickname ?? null,
@@ -12,6 +10,6 @@ export const getUserRequest = async () => {
   }
 }
 
-export const logOutRequest = async () => {
-  await axiosInstance.get(`${apiUrl}/auth/logout`)
+export const getLogoutResponse = async () => {
+  await axiosInstance.get(`/auth/logout`)
 }

@@ -3,7 +3,7 @@ import { GreenLogo } from "../../assets"
 import useAnimateNavigate from "../../hooks/useAnimateNavigate";
 import useUserStore from "../../stores/useUserStore";
 import { useEffect } from "react";
-import { getUserRequest, logOutRequest } from "../../apis/user";
+import { getUserResponse, getLogoutResponse } from "../../apis/user";
 import Motion from "../motion/Motion";
 
 const Header = () => {
@@ -17,14 +17,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
-    await logOutRequest()
+    await getLogoutResponse()
     setUser(null)
   }
 
   useEffect(() => {
 
     const getUser = async () => {
-      const data = await getUserRequest()
+      const data = await getUserResponse()
 
       if (data.detail === null) {
         setUser({

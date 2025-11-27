@@ -1,6 +1,6 @@
 import type React from "react";
 import useBlobCursorStore from "../../stores/useBlobCursorStore";
-import { EMOTION_COLORS, EMOTION_LABELS } from "../../constants/emotion";
+import { BG_COLOR, EMOTION_COLORS, EMOTION_LABELS } from "../../constants/emotion";
 import { EmotionIcon } from "../common/EmotionIcons";
 
 type EmotionButtonProps = {
@@ -22,15 +22,6 @@ export default function EmotionButton({
   const {
     setBlobCursorColor,
   } = useBlobCursorStore();
-
-  const BG_COLOR = {
-    RANDOM: "bg-light-gray",
-    JOY: "bg-yellow",
-    SADNESS: "bg-blue",
-    ANGRY: "bg-orange",
-    SURPRISE: "bg-purple",
-    ANXIETY: "bg-green",
-  } as const satisfies Record<Emotion, string>;
 
   const handleMouseEnter = () => {
     if (isTransitioning) return;
