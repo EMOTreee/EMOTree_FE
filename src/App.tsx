@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import './App.css'
 import Layout from "./layouts/Layout"
 import Home from "./pages/home/Home"
-import Interpret from "./pages/interpret/Interpret"
+import Recognize from "./pages/recognize/recognize"
 import Empathy from "./pages/empathy/Empathy"
 import Mypage from "./pages/mypage/Mypage"
 import Voice from "./pages/express/voice/Voice"
@@ -16,7 +16,7 @@ function App() {
         <Route path="mypage" element={<Mypage />} />
         <Route index element={<Home />} />
         <Route path="emotion/*">
-          <Route path="interpret" element={<Interpret />} />
+          <Route path="recognize" element={<Recognize />} />
           <Route path="empathy" element={<Empathy />} />
         </Route>
         <Route path="express/*">

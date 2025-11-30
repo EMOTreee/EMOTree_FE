@@ -15,8 +15,8 @@ export const ITEMS = [
   },
   {
     image: '/images/yellow.png',
-    link: '/emotion/interpret',
-    title: '감정 해석 트레이닝',
+    link: '/emotion/recognize',
+    title: '감정 인지 트레이닝',
     description: '표정과 목소리에 담긴 미묘한 신호를 더 섬세하게 읽어내며, 감정의 흐름을 차분히 이해하는 능력을 키워보세요. EMOTree는 이러한 작은 감정의 흔적을 명확하게 바라볼 수 있도록 도와줍니다.',
     color: '#EEEE81'
   },

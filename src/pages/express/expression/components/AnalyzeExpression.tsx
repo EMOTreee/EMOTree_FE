@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CameraIcon, ImageIcon } from "../../../../assets";
 import Motion from "../../../../components/motion/Motion";
-import { BG_COLOR, EMOTION_COLORS } from "../../../../constants/emotion";
+import { EMOTION_BG_COLOR, EMOTION_COLOR } from "../../../../constants/emotion";
 import CameraCapture from "./CameraCapture";
 import { AnimatePresence, motion } from "framer-motion";
 import ImageDrop from "./ImageDrop";
@@ -132,7 +132,7 @@ export default function AnalyzeExpression({
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ opacity: 0, height: 110 }}
                   transition={{ duration: 0.3 }}
-                  className={`${BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
+                  className={`${EMOTION_BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
                   <TypingText text={feedback} />
                 </motion.div>
                 <Navigator
@@ -142,7 +142,7 @@ export default function AnalyzeExpression({
             ) : (
               <div className={`min-h-[110px]`}>
                 <HashLoader
-                  color={EMOTION_COLORS[selectedEmotion]}
+                  color={EMOTION_COLOR[selectedEmotion]}
                   loading
                   size={40}
                 />

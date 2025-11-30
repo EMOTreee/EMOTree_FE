@@ -3,7 +3,7 @@ import useBlobCursorStore from "../../../stores/useBlobCursorStore";
 import Tooltip from "./Tooltip";
 import { useRef } from "react";
 import { debounce } from "lodash"
-import { EMOTION_COLORS } from "../../../constants/emotion";
+import { EMOTION_COLOR } from "../../../constants/emotion";
 
 const graphData = [
   {
@@ -292,11 +292,11 @@ export default function Graph() {
       <ResponsiveLine
         data={graphData}
         useMesh={true}
-        colors={(serie) => EMOTION_COLORS[serie.id as Emotion]}
+        colors={(serie) => EMOTION_COLOR[serie.id as Emotion]}
         pointColor='white'
         pointBorderWidth={2}
         pointBorderColor={(d) =>
-          EMOTION_COLORS[d.seriesId as Emotion]
+          EMOTION_COLOR[d.seriesId as Emotion]
         }
         curve='linear'
         pointSize={10}

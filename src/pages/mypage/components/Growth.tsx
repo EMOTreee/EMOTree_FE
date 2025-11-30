@@ -3,7 +3,7 @@ import Graph from "./Graph";
 
 const TABS = [
   {
-    title: '감정 해석'
+    title: '감정 인지'
   },
   {
     title: '감정 공감'
@@ -15,7 +15,7 @@ const TABS = [
 
 export default function Growth() {
 
-  const [currentTab, setCurrentTab] = useState('감정 해석');
+  const [currentTab, setCurrentTab] = useState('감정 인지');
 
   return (
     <div className={`w-full h-full flex flex-col`}>

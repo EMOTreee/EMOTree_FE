@@ -2,7 +2,7 @@ import EmotionButton from "./EmotionButton"
 import Motion from "../motion/Motion"
 import { useEffect, useState } from "react"
 import useBlobCursorStore from "../../stores/useBlobCursorStore"
-import { EMOTION_COLORS } from "../../constants/emotion"
+import { EMOTION_COLOR } from "../../constants/emotion"
 
 type EmotionSelectProps = {
   handleEmotionSelect: (emotion: Emotion | null) => void
@@ -34,7 +34,7 @@ export default function EmotionSelect({
   const [enteredEmotion, setEnteredEmotion] = useState<Emotion>('RANDOM');
 
   useEffect(() => {
-    setBlobCursorColor(EMOTION_COLORS['RANDOM'])
+    setBlobCursorColor(EMOTION_COLOR['RANDOM'])
   }, [])
 
   return (

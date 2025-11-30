@@ -1,4 +1,4 @@
-export const EMOTION_COLORS: Record<Emotion, string> = {
+export const EMOTION_COLOR: Record<Emotion, string> = {
   RANDOM: '#DBDBDB',
   JOY: '#EEEE81',
   SADNESS: '#81B4EE',
@@ -7,7 +7,7 @@ export const EMOTION_COLORS: Record<Emotion, string> = {
   ANXIETY: '#B4EE81',
 }
 
-export const BG_COLOR = {
+export const EMOTION_BG_COLOR = {
   RANDOM: "bg-light-gray",
   JOY: "bg-yellow",
   SADNESS: "bg-blue",
@@ -16,7 +16,7 @@ export const BG_COLOR = {
   ANXIETY: "bg-green",
 } as const satisfies Record<Emotion, string>;
 
-export const EMOTION_LABELS = {
+export const EMOTION_LABEL = {
   RANDOM: "랜덤",
   JOY: "기쁨",
   SADNESS: "슬픔",

@@ -1,6 +1,6 @@
 import { BounceLoader } from "react-spinners";
 import Motion from "../../../../components/motion/Motion";
-import { EMOTION_COLORS } from "../../../../constants/emotion";
+import { EMOTION_COLOR } from "../../../../constants/emotion";
 import { MicrophoneIcon, StartIcon, StopIcon } from "../../../../assets";
 import ExpressTitle from "../../components/ExpressTitle";
 import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
@@ -65,7 +65,7 @@ export default function Recorder({
       {isRecording ? (
         <div className={`w-[40%] min-w-[200px] max-w-[300px] aspect-square relative flex justify-center items-center`}>
           <BounceLoader
-            color={EMOTION_COLORS[selectedEmotion]}
+            color={EMOTION_COLOR[selectedEmotion]}
             size={size} />
           <Motion.div
             key={'stop-icon'}
@@ -75,7 +75,7 @@ export default function Recorder({
         </div>
       ) : (
         <div className={`w-[40%] min-w-[200px] max-w-[300px] aspect-square relative transition-all-300`}>
-          <span style={{ backgroundColor: EMOTION_COLORS[selectedEmotion] }} className={`block aspect-square opacity-60 rounded-full transition-all-300`} />
+          <span style={{ backgroundColor: EMOTION_COLOR[selectedEmotion] }} className={`block aspect-square opacity-60 rounded-full transition-all-300`} />
           <Motion.div
             key={'start-icon'}
             onClick={startRecording}>
