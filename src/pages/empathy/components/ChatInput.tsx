@@ -46,8 +46,9 @@ export default function ChatInput({
         onClick={handleContainerClick}>
         <AutoHeightTextarea
           minHeight={24}
+          maxHeight={200}
           ref={textareaRef}
-          className={`w-full placeholder:text-hover-gray text-black outline-none resize-none no-scroll cursor-none max-h-[200px] overflow-scroll`}
+          className={`w-full placeholder:text-hover-gray text-black outline-none resize-none no-scroll cursor-none overflow-scroll`}
           placeholder={`공감하는 말을 적어보세요`}
           value={text}
           onChange={(e) => setText(e.target.value)}
