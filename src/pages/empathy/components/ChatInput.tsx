@@ -1,7 +1,6 @@
 import { AutoHeightTextarea } from "autogrow-input"
 import { Plane } from "../../../assets"
 import { useRef } from "react"
-import { EMOTION_COLOR } from "../../../constants/emotion"
 
 type ChatInputProps = {
   text: string
