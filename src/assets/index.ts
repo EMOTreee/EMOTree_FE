@@ -17,3 +17,5 @@ export { default as StartIcon } from './start.svg?react';
 export { default as StopIcon } from './stop.svg?react';
 
 export { default as DragImage } from './drag_image.svg?react';
+
+export { default as Plane } from './plane.svg?react';
