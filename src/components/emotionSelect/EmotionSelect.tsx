@@ -22,7 +22,7 @@ export default function EmotionSelect({
     ...(enableRandom ? ["RANDOM"] : []),
     "JOY",
     "SADNESS",
-    "ANGRY",
+    "ANGER",
     "SURPRISE",
     "ANXIETY"
   ] as Emotion[]

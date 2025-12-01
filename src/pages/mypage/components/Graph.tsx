@@ -115,7 +115,7 @@ const graphData = [
     ]
   },
   {
-    id: 'ANGRY',
+    id: 'ANGER',
     data: [
       {
         x: 'JAN',

@@ -1,1 +1,1 @@
-type Emotion = "RANDOM" | "JOY" | "SADNESS" | "ANGRY" | "SURPRISE" | "ANXIETY";
+type Emotion = "RANDOM" | "JOY" | "SADNESS" | "ANGER" | "SURPRISE" | "ANXIETY";

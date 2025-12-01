@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CameraIcon, ImageIcon } from "../../../../assets";
 import Motion from "../../../../components/motion/Motion";
 import { EMOTION_BG_COLOR, EMOTION_COLOR } from "../../../../constants/emotion";
 import CameraCapture from "./CameraCapture";
 import { AnimatePresence, motion } from "framer-motion";
 import ImageDrop from "./ImageDrop";
-import blobURLtoFile from "../../../../util/DataURLtoFile";
-import { getAnalyzeExpressionResponse } from "../../../../apis/emotion";
 import { HashLoader } from 'react-spinners';
 import Navigator from "../../../../components/common/Navigator";
 import TypingText from "../../../../components/common/TypingText";
 import ExpressTitle from "../../components/ExpressTitle";
+import { useAnalyzeExpression } from "../hooks/useAnalyzeExpression";
 
 type AnalyzeExpressionProps = {
   selectedEmotion: Emotion
@@ -30,41 +29,20 @@ export default function AnalyzeExpression({
   setHasCamera,
 }: AnalyzeExpressionProps) {
 
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [photo, setPhoto] = useState<string | null>(null);
+  const {
+    imageUrl,
+    setImageUrl,
+    photo,
+    setPhoto,
+    feedback,
+    setFeedback,
+    isPending,
+  } = useAnalyzeExpression(selectedEmotion);
 
   const handleMouseEnter = (mode: typeof currentMode) => {
     if (!imageUrl) setCurrentMode(mode)
   }
 
-  useEffect(() => {
-    const getAnalyzeExpression = async () => {
-      if (imageUrl) {
-        try {
-          setIsPending(true)
-          const file = await blobURLtoFile(imageUrl, "image.png")
-          const formData = new FormData();
-          formData.append("file", file)
-          formData.append("targetEmotion", selectedEmotion)
-
-          const data = await getAnalyzeExpressionResponse(formData)
-
-          setFeedback(data.feedback)
-          console.log(data)
-        } catch (e) {
-          console.log(e)
-        } finally {
-          setIsPending(false)
-        }
-
-      }
-    }
-
-    getAnalyzeExpression()
-
-  }, [imageUrl])
 
   const handleBackspace = () => {
     setFeedback(null)
@@ -107,7 +85,7 @@ export default function AnalyzeExpression({
       <AnimatePresence mode="wait">
         {!isPending && !feedback ? (
           <motion.div className={`flex flex-col gap-5 items-center h-[110px]`}>
-            <ExpressTitle selectedEmotion={selectedEmotion}/>
+            <ExpressTitle selectedEmotion={selectedEmotion} />
             <div className={`flex flex-row gap-5 items-center select-none`}>
               {hasCamera &&
                 <CameraIcon

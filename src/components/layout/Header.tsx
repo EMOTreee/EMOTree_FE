@@ -5,6 +5,7 @@ import useUserStore from "../../stores/useUserStore";
 import { useEffect } from "react";
 import { getUserResponse, getLogoutResponse } from "../../apis/user";
 import Motion from "../motion/Motion";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
 
@@ -21,22 +22,20 @@ const Header = () => {
     setUser(null)
   }
 
+  const { data } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: getUserResponse,
+    retry: 0
+  })
+
   useEffect(() => {
-
-    const getUser = async () => {
-      const data = await getUserResponse()
-
-      if (data.detail === null) {
-        setUser({
-          name: data.name,
-          email: data.email,
-        })
-      } else setUser(null)
-    }
-
-    getUser()
-
-  }, [])
+    if (data?.detail === null) {
+      setUser({
+        name: data.name,
+        email: data.email,
+      });
+    } else setUser(null)
+  }, [data])
 
   return (
     <header className={`h-20 max-md:h-16 flex flex-row-reverse w-screen fixed top-0 bg-white px-15 max-md:px-6 shadow-0-4-20-0 z-200 select-none transition-height-300`}>

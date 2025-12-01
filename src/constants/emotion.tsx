@@ -2,7 +2,7 @@ export const EMOTION_COLOR: Record<Emotion, string> = {
   RANDOM: '#DBDBDB',
   JOY: '#EEEE81',
   SADNESS: '#81B4EE',
-  ANGRY: '#EEC881',
+  ANGER: '#EEC881',
   SURPRISE: '#C2B3F0',
   ANXIETY: '#B4EE81',
 }
@@ -11,7 +11,7 @@ export const EMOTION_BG_COLOR = {
   RANDOM: "bg-light-gray",
   JOY: "bg-yellow",
   SADNESS: "bg-blue",
-  ANGRY: "bg-orange",
+  ANGER: "bg-orange",
   SURPRISE: "bg-purple",
   ANXIETY: "bg-green",
 } as const satisfies Record<Emotion, string>;
@@ -20,7 +20,7 @@ export const EMOTION_LABEL = {
   RANDOM: "랜덤",
   JOY: "기쁨",
   SADNESS: "슬픔",
-  ANGRY: "분노",
+  ANGER: "분노",
   SURPRISE: "놀람",
   ANXIETY: "불안",
 } as const satisfies Record<Emotion, string>;
@@ -29,7 +29,7 @@ export const EMOTION_PARTICLE = {
   RANDOM: "을",
   JOY: "을",
   SADNESS: "을",
-  ANGRY: "를",
+  ANGER: "를",
   SURPRISE: "을",
   ANXIETY: "을",
 }

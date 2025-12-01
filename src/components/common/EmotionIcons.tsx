@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import { 
-  AngryIcon,
+  AngerIcon,
   AnxietyIcon,
   JoyIcon,
   RandomIcon,
@@ -12,7 +12,7 @@ const iconMap: Record<Emotion, React.ComponentType<ComponentProps<"svg">>> = {
   RANDOM: RandomIcon,
   JOY: JoyIcon,
   SADNESS: SadnessIcon,
-  ANGRY: AngryIcon,
+  ANGER: AngerIcon,
   SURPRISE: SurpriseIcon,
   ANXIETY: AnxietyIcon,
 };
