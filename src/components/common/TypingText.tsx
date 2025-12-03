@@ -13,7 +13,7 @@ export default function TypingText({ text, speed = 30, loop = false, className }
   const indexRef = useRef(0);
 
   useEffect(() => {
-    let interval: number;
+    let interval: NodeJS.Timeout;
 
     const startTyping = () => {
       interval = setInterval(() => {
