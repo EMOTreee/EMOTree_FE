@@ -7,7 +7,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   return res.status(200).json({
-    name: '이준희',
+    nickname: '이준희',
     email: 'example@daum.net'
   });
 }

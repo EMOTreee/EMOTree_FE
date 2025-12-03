@@ -8,6 +8,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
   return res.status(200).json({
     feedback:
-      "지금 네 공감 표현 아주 정확했어요. 감정을 있는 그대로 인정해주면서도 안정감을 주는 방식이 좋았습니다.",
+      "지금 공감 표현 아주 좋았어요. 감정을 있는 그대로 인정해주면서도 안정감을 주는 방식이 좋았습니다.",
   });
 }
