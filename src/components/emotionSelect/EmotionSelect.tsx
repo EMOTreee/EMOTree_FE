@@ -9,6 +9,7 @@ type EmotionSelectProps = {
   title?: string
   enableRandom?: boolean
   isTransitioning?: boolean
+  disableButton?: boolean
 }
 
 export default function EmotionSelect({
@@ -16,6 +17,7 @@ export default function EmotionSelect({
   title,
   enableRandom,
   isTransitioning,
+  disableButton,
 }: EmotionSelectProps) {
 
   const EmotionList = [
@@ -47,7 +49,7 @@ export default function EmotionSelect({
           <div key={emotion} className={`md:mb-5`}>
             <EmotionButton 
               emotion={emotion as Emotion} 
-              onClick={() => handleEmotionSelect(emotion)} 
+              onClick={disableButton ? () => {} : () => handleEmotionSelect(emotion)} 
               enteredEmotion={enteredEmotion} 
               setEnteredEmotion={setEnteredEmotion} 
               isTransitioning={isTransitioning}/>

@@ -80,16 +80,26 @@ export default function Recognize() {
           {selectedEmotion === null ? (
             <EmotionSelect
               handleEmotionSelect={setSelectedEmotion}
-              isTransitioning={isTransitioning} />
+              isTransitioning={isTransitioning} 
+              disableButton={isQuizFetching} />
           ) : (
-            <Motion.div 
-              key={'recognize-feedback'}
-              className={`flex flex-col gap-5`}>
-              <p className={`text-[14px] max-sm:text-[12px] w-[50%] max-md:w-[60%] text-center mx-auto`}>
-                {feedback}
-              </p>
-              <Navigator handleRetry={handleRetry} noneBackspace />
-            </Motion.div>
+            !quizMutate.isPending ? (
+              <Motion.div
+                key={'recognize-feedback'}
+                className={`flex flex-col gap-5`}>
+                <p className={`text-[14px] max-sm:text-[12px] w-[50%] max-md:w-[60%] text-center mx-auto`}>
+                  {feedback}
+                </p>
+                <Navigator handleRetry={handleRetry} noneBackspace />
+              </Motion.div>
+            ) : (
+              <Motion.div key={'feedback-loading'} className={`mt-5`}>
+                <HashLoader
+                  color={'#6FB936'}
+                  loading
+                  size={40} />
+              </Motion.div>
+            )
           )}
         </EmotionSelectWrapper>
       </Motion.div>
