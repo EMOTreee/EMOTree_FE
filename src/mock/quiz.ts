@@ -1,0 +1,60 @@
+export default function () {
+  return [
+    {
+      url: "/quiz/generate",
+      method: "get",
+      timeout: 500,
+      response: () => {
+
+        const quizs = [
+          {
+            quizId: "JOY",
+            quizImageUrl: "/src/mock/images/JOY.png"
+          },
+          {
+            quizId: "SADNESS",
+            quizImageUrl: "/src/mock/images/SADNESS.png"
+          },
+          {
+            quizId: "ANGER",
+            quizImageUrl: "/src/mock/images/ANGER.png"
+          },
+          {
+            quizId: "SURPRISE",
+            quizImageUrl: "/src/mock/images/SURPRISE.png"
+          },
+          {
+            quizId: "ANXIETY",
+            quizImageUrl: "/src/mock/images/ANXIETY.png"
+          },
+        ]
+        const quiz = quizs[Math.floor(Math.random() * quizs.length)];
+
+        return quiz
+      }
+    },
+    {
+      url: "/quiz/submit",
+      method: "post",
+      timeout: 500,
+      response: ({ body } : { body: { quizId: string, userAnswer: string } }) => {
+        const { quizId, userAnswer } = body;
+
+        const feedbacks = {
+          RANDOM: "입술이 크게 벌어지면서 상하 치아가 드러나는 활짝 웃는 입 모양이 중심적이며, 입꼬리가 자연스럽게 위로 올라가 있습니다. 눈은 살짝 좁혀지고 눈가 주변에 미소로 인한 잔주름이 생겨 눈웃음을 형성하며, 시선은 카메라를 향해 집중되어 있어 생동감 있는 즐거움을 전달합니다. 어깨와 목 주변 근육도 긴장되지 않고 자연스럽게 풀려 있어 전체적으로 편안하면서도 행복한 자세를 보여줍니다.",
+          JOY: "입술이 크게 벌어지면서 상하 치아가 드러나는 활짝 웃는 입 모양이 중심적이며, 입꼬리가 자연스럽게 위로 올라가 있습니다. 눈은 살짝 좁혀지고 눈가 주변에 미소로 인한 잔주름이 생겨 눈웃음을 형성하며, 시선은 카메라를 향해 집중되어 있어 생동감 있는 즐거움을 전달합니다. 어깨와 목 주변 근육도 긴장되지 않고 자연스럽게 풀려 있어 전체적으로 편안하면서도 행복한 자세를 보여줍니다.",
+          SADNESS: "눈썹이 안쪽으로 모이며 위로 올라가 얼굴 중앙에 주름이 깊게 생겨 전형적인 걱정·슬픔 표정을 형성하고 있습니다. 눈은 약간 아래로 처져 있고 시선은 땅이나 아래쪽을 향해 있어 우울한 느낌을 강조합니다. 입꼬리는 아래로 처져 있으며, 입술이 굳어 있지 않고 약간 풀려 있어 슬픈 감정을 나타내고 있고, 어깨는 살짝 내려가 있어 몸 전체가 무거운 감정을 반영하고 있습니다.",
+          ANGER: "이마와 눈 사이의 깊게 잡힌 주름은 눈썹을 아래로 모아 찌푸린 상태를 보여주며, 눈은 강하게 뜨이고 시선이 정면을 응시하여 날카로운 긴장감을 줍니다. 또한 입술은 아래로 굽어져 단단히 다물려 있으며, 턱 근육이 긴장되어 있어 전반적으로 분노와 적대감을 강조합니다.",
+          SURPRISE: "눈이 크게 뜨여 있으며, 눈썹이 위로 올라가 있어 시선이 넓게 펼쳐진 듯한 인상을 줍니다. 입은 살짝 벌어져 있고, 턱이 약간 내려가 있어 갑작스러운 충격이나 놀람을 표현합니다. 어깨가 살짝 위로 올라가고, 몸이 약간 뒤로 젖혀져 있어 긴장과 반사적인 반응이 드러납니다.",
+          ANXIETY: "눈썹이 강하게 위로 모이며 이마에 깊은 주름이 잡힌 모습은 내면의 긴장감과 불안함을 반영합니다. 눈동자가 흔들리듯 움직이며 시선이 불안정하게 흔들리는 점과, 입술이 단단히 다물어진 채 입꼬리가 약간 아래로 내려간 모습은 마음 속 초조함과 걱정을 짙게 드러냅니다. 전체적으로 얼굴과 목 주변 근육이 긴장되어 있어 몸도 함께 경직된 듯한 인상을 줍니다.",
+        }
+
+        return {
+          isCorrect: userAnswer === quizId,
+          correctEmotion: quizId,
+          feedback: feedbacks[quizId as Emotion]
+        }
+      }
+    },
+  ]
+}
