@@ -23,7 +23,7 @@ export default function ChatContent({
   const {
     chats,
     scenario,
-    isScenarioPending,
+    isScenarioFetching: isScenarioPending,
     refetchScenario,
     sendMessage,
     isEmpathyPending
@@ -80,7 +80,7 @@ export default function ChatContent({
       <ChatInput
         text={text}
         setText={setText}
-        sendMessage={() => sendMessage(scenario, text)}
+        sendMessage={() => sendMessage(text)}
       />
     </Motion.div>
   )

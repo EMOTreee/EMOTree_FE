@@ -1,5 +1,5 @@
 type Chat = {
-  id: number,
+  id: string,
   isUser: boolean,
   text: string,
 }

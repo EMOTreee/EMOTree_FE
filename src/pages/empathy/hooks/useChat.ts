@@ -1,72 +1,73 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getScenarioResponse, submitEmpathy } from "../../../apis/empathy";
 
 export const useChat = (selectedEmotion: Emotion) => {
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [scenario, setScenario] = useState("");
 
-  const scenarioQuery = useQuery({
+  const {
+    data: scenarioData,
+    refetch,
+    isFetching,
+  } = useQuery({
     queryKey: ['scenario', selectedEmotion],
     queryFn: () => getScenarioResponse(selectedEmotion),
     enabled: !!selectedEmotion
   });
 
-  useEffect(() => {
-    if (scenarioQuery.data) {
-      setScenario(scenarioQuery.data.scenario)
-      setChats([
-        {
-          id: Date.now(),
-          isUser: false,
-          text: scenarioQuery.data.scenario
-        }
-      ]);
-    }
-  }, [scenarioQuery.data]);
+  const scenario = scenarioData?.scenario ?? "";
+  const [chats, setChats] = useState<Chat[]>([]);
 
+  const addChat = (text: string, isUser: boolean) => {
+    return {
+      id: crypto.randomUUID(),
+      isUser,
+      text,
+    }
+  }
 
   const empathyMutate = useMutation({
     mutationFn: async ({ scenario, userMessage }: { scenario: string, userMessage: string }) => {
       return await submitEmpathy(scenario, userMessage)
     },
     onSuccess: (data) => {
-      console.log(data)
       setChats((prev) => [
         ...prev,
-        {
-          id: Date.now(),
-          isUser: false,
-          text: data.feedback
-        }
+        addChat(data.feedback, false),
       ]);
     }
   })
 
-  const sendMessage = (scenario: string, userMessage: string) => {
+  const sendMessage = (userMessage: string) => {
+    if (!scenario) return;
+
     setChats((prev) => [
       ...prev,
-      {
-        id: Date.now(),
-        isUser: true,
-        text: userMessage
-      }
+      addChat(userMessage, true)
     ])
     empathyMutate.mutate({ scenario, userMessage })
   }
 
   const refetchScenario = () => {
     setChats([])
-    setScenario("")
-    scenarioQuery.refetch({ cancelRefetch: false })
+    refetch({ cancelRefetch: false })
   }
 
+  const scenarioChat: Chat | null = scenario
+    ? {
+      id: "scenario", // 고정 ID (key용)
+      isUser: false,
+      text: scenario,
+    }
+    : null;
+
+  // 실제로 화면에 쓸 chats
+  const displayChats = scenarioChat ? [scenarioChat, ...chats] : chats;
+
   return {
-    chats,
+    chats: displayChats,
     setChats,
     scenario,
-    setScenario,
-    isScenarioPending: scenarioQuery.isFetching,
+    isScenarioFetching: isFetching,
     refetchScenario,
     sendMessage,
     isEmpathyPending: empathyMutate.isPending,

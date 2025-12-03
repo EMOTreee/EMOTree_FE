@@ -6,18 +6,22 @@ type EmotionSelectWrapperProps = {
   children: React.ReactNode;
   setIsTransitioning: (value: boolean) => void;
   pageKey: string;
+  heightFull?: boolean;
+  className?: string;
 };
 
 export default function EmotionSelectWrapper({
   children,
   setIsTransitioning,
   pageKey,
+  heightFull=true,
+  className,
 }: EmotionSelectWrapperProps) {
   return (
     <AnimateContainer>
       <Motion.div
         key={pageKey}
-        className="w-full h-full flex flex-col items-center justify-center">
+        className={`w-full ${heightFull ? `h-full justify-center` : ``} flex flex-col items-center ${className}`}>
         <AnimatePresence
           mode="wait"
           onExitComplete={() => setIsTransitioning(false)}>

@@ -5,7 +5,7 @@ import { useRef } from "react"
 type ChatInputProps = {
   text: string
   setText: React.Dispatch<React.SetStateAction<string>>
-  sendMessage: (chat: Chat) => void
+  sendMessage: (message: string) => void
 }
 
 export default function ChatInput({
@@ -22,11 +22,7 @@ export default function ChatInput({
 
   const handleMessage = () => {
     if (text.trim() !== "") {
-      sendMessage({
-        id: 0,
-        isUser: true,
-        text
-      })
+      sendMessage(text)
       setText("")
     }
   }

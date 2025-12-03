@@ -5,10 +5,11 @@ import { EmotionIcon } from "../common/EmotionIcons";
 
 type EmotionButtonProps = {
   emotion: Emotion
-  onClick: () => void
-  enteredEmotion: Emotion | null
-  setEnteredEmotion: React.Dispatch<React.SetStateAction<Emotion>>
+  onClick?: () => void
+  enteredEmotion?: Emotion | null
+  setEnteredEmotion?: React.Dispatch<React.SetStateAction<Emotion>>
   isTransitioning?: boolean
+  eventNone?: boolean
 }
 
 export default function EmotionButton({
@@ -17,6 +18,7 @@ export default function EmotionButton({
   enteredEmotion,
   setEnteredEmotion,
   isTransitioning,
+  eventNone,
 }: EmotionButtonProps) {
 
   const {
@@ -24,7 +26,7 @@ export default function EmotionButton({
   } = useBlobCursorStore();
 
   const handleMouseEnter = () => {
-    if (isTransitioning) return;
+    if (isTransitioning || !setEnteredEmotion) return;
 
     setEnteredEmotion(emotion)
     setBlobCursorColor(EMOTION_COLOR[emotion])
@@ -32,9 +34,11 @@ export default function EmotionButton({
 
   return (
     <div
-      className={`w-fit h-fit rounded-[14px] flex flex-row items-center gap-2 transition-all-300 text-[16px] max-md:text-[14px] select-none opacity-60 border border-gray hover:text-gray 
+      className={`w-fit h-fit rounded-[14px] flex flex-row items-center gap-2 transition-all-300 text-[16px] max-md:text-[14px] select-none border border-gray hover:text-gray 
                   px-5 py-2.5 max-md:px-3 max-md:py-2
-                  ${enteredEmotion === emotion ? `${EMOTION_BG_COLOR[emotion]}` : ``}`}
+                  ${eventNone ? `${EMOTION_BG_COLOR[emotion]}` : 
+                    `${enteredEmotion === emotion ? `${EMOTION_BG_COLOR[emotion]}` : ``} opacity-60`
+                  }`}
       onMouseEnter={handleMouseEnter}
       onPointerEnter={handleMouseEnter}
       onClick={onClick}>

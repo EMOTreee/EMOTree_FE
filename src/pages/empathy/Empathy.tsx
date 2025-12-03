@@ -25,15 +25,13 @@ export default function Empathy() {
     <EmotionSelectWrapper
       setIsTransitioning={setIsTransitioning}
       pageKey={'empathy'}>
-      {selectedEmotion === null && (
+      {selectedEmotion === null ? (
         <EmotionSelect
           handleEmotionSelect={handleEmotionSelect}
           title={"어떤 감정에 공감해 볼까요?"}
           enableRandom
           isTransitioning={isTransitioning} />
-      )}
-
-      {selectedEmotion !== null && (
+      ) : (
         <ChatContent
           key="empathy-chat"
           selectedEmotion={selectedEmotion}
