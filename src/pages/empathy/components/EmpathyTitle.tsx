@@ -16,7 +16,7 @@ export default function EmpathyTitle({
         className={`w-8 h-8`} />
       <p>
         <span className={`font-bold`}>
-          {EMOTION_LABEL[emotion]}
+          {emotion === 'RANDOM' ? '감정' : EMOTION_LABEL[emotion]}
         </span>
         에 공감해 보세요
       </p>

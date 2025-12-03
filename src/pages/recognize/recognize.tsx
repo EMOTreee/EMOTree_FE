@@ -45,7 +45,7 @@ export default function Recognize() {
       <Motion.div
         key={'recognize'}
         className={`responsive-p-t h-full flex flex-col justify-center items-center gap-10 select-none`}>
-        <p className={`text-[32px] font-semibold`}>어떤 감정이 담겨있을까요?</p>
+        <p className={`text-[32px] max-md:text-[28px] max-sm:text-[24px] font-semibold transition-all-300`}>어떤 감정이 담겨있을까요?</p>
         <AnimatePresence mode={'wait'}>
           {isQuizFetching ? (
             <Motion.div
@@ -76,7 +76,7 @@ export default function Recognize() {
           setIsTransitioning={setIsTransitioning}
           pageKey={'recognize-emotion-select'}
           heightFull={false}
-          className={`min-h-[146px] max-md:min-h-[119px]`}>
+          className={`min-h-[150px] max-md:min-h-[170px] max-sm:min-h-[180px]`}>
           {selectedEmotion === null ? (
             <EmotionSelect
               handleEmotionSelect={setSelectedEmotion}
@@ -85,7 +85,7 @@ export default function Recognize() {
             <Motion.div 
               key={'recognize-feedback'}
               className={`flex flex-col gap-5`}>
-              <p className={`text-[14px] w-[50%] text-center mx-auto`}>
+              <p className={`text-[14px] max-sm:text-[12px] w-[50%] max-md:w-[60%] text-center mx-auto`}>
                 {feedback}
               </p>
               <Navigator handleRetry={handleRetry} noneBackspace />
