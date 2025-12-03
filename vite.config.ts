@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
+import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,5 +13,8 @@ export default defineConfig({
         // titleProp, ref 등 필요한 옵션 설정 가능
       },
     }),
+    viteMockServe({
+      mockPath: './src/mock',
+    })
   ],
 })
