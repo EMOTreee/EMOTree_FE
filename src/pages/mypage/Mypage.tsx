@@ -1,13 +1,25 @@
+import { useEffect } from "react";
 import AnimateContainer from "../../components/common/AnimateContainer";
 import Motion from "../../components/motion/Motion";
 import useUserStore from "../../stores/useUserStore";
 import Growth from "./components/Growth";
+import useAnimateNavigate from "../../hooks/useAnimateNavigate";
 
 export default function Mypage() {
 
   const {
-    user
+    user,
+    isLoggedIn,
+    isLoading,
   } = useUserStore()
+
+  const animateNavigate = useAnimateNavigate();
+
+  useEffect(() => {
+    if(!isLoggedIn && !isLoading) {
+      animateNavigate('/')
+    }
+  }, [isLoggedIn])
 
   return (
     <AnimateContainer>

@@ -27,7 +27,7 @@ export const useChat = (selectedEmotion: Emotion) => {
 
   const empathyMutate = useMutation({
     mutationFn: async ({ scenario, userMessage }: { scenario: string, userMessage: string }) => {
-      return await submitEmpathy(scenario, userMessage)
+      return await submitEmpathy(selectedEmotion, scenario, userMessage)
     },
     onSuccess: (data) => {
       setChats((prev) => [

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useSpring, animated, easings } from "react-spring"
 
 type EmpathyTypeProps = {
   userName: string | null | undefined;
@@ -13,11 +14,12 @@ export default function EmpathyType({
   empathyType,
 }: EmpathyTypeProps) {
 
-  const emotionalRatio = empathyType?.type === "EMOTIONAL" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100
-  const cognitiveRatio = empathyType?.type === "COGNITIVE" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100
+  const emotionalRatio = empathyType?.type === "EMOTIONAL" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100 | 0
+  const cognitiveRatio = empathyType?.type === "COGNITIVE" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100 | 0
 
+  const emotionalSpring = useSpring({ from: { val: 0 }, val: emotionalRatio, config: { duration: 500, easing: easings.easeInOutCubic } });
+  const cognitiveSpring = useSpring({ from: { val: 0 }, val: cognitiveRatio, config: { duration: 500, easing: easings.easeInOutCubic } });
 
-  console.log(cognitiveRatio)
 
   return (
     <div className={`flex flex-row gap-5 justify-center items-center px-5 py-2.5`}>
@@ -44,13 +46,17 @@ export default function EmpathyType({
             <div className={`aspect-square h-full p-1`}>
               <div className={`aspect-square h-full bg-purple opacity-60`} />
             </div>
-            <p className={`text-[12px]`}>감정 공감 {emotionalRatio}%</p>
+            <p className={`text-[12px]`}>
+              감정 공감: <animated.span>{emotionalSpring.val.to(v => Math.floor(v))}</animated.span>%
+            </p>
           </div>
           <div className={`flex flex-row`}>
             <div className={`aspect-square h-full p-1`}>
               <div className={`aspect-square h-full bg-yellow opacity-60`} />
             </div>
-            <p className={`text-[12px]`}>인지 공감 {cognitiveRatio}%</p>
+            <p className={`text-[12px]`}>
+              인지 공감: <animated.span>{cognitiveSpring.val.to(v => Math.floor(v))}</animated.span>%
+            </p>
           </div>
         </div>
       </div>

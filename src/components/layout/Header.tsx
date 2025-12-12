@@ -22,10 +22,10 @@ const Header = () => {
     setUser(null)
   }
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserResponse,
-    retry: 0
+    retry: 0,
   })
 
   useEffect(() => {
@@ -34,8 +34,14 @@ const Header = () => {
         name: data.name,
         email: data.email,
       });
-    } else setUser(null)
+    } else {
+      setUser(null)
+    }
   }, [data])
+
+  useEffect(() => {
+    if (isError) setUser(null)
+  }, [isError])
 
   return (
     <header className={`h-20 max-md:h-16 flex flex-row-reverse w-screen fixed top-0 bg-white px-15 max-md:px-6 shadow-0-4-20-0 z-200 select-none transition-height-300`}>

@@ -10,10 +10,12 @@ export const getScenarioResponse = async (
 }
 
 export const submitEmpathy = async (
+  emotion: Emotion,
   scenario: string, 
   userMessage: string
 ) => {
   const { data } = await axiosInstance.post('/empathy/submit', {
+    emotion,
     scenario,
     userMessage,
   })
