@@ -1,295 +1,57 @@
 import { ResponsiveLine } from "@nivo/line";
 import useBlobCursorStore from "../../../stores/useBlobCursorStore";
 import Tooltip from "./Tooltip";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { debounce } from "lodash"
 import { EMOTION_COLOR } from "../../../constants/emotion";
+import { useYAxisZoom } from "../hooks/useYAxisZoom";
+import { useGraphData } from "../hooks/useGraphData";
 
-const graphData = [
-  {
-    id: 'JOY',
-    data: [
-      {
-        x: 'JAN',
-        y: 2
-      },
-      {
-        x: 'FEB',
-        y: 2.2
-      },
-      {
-        x: 'MAR',
-        y: 2.6
-      },
-      {
-        x: 'APR',
-        y: 3
-      },
+type GraphProps = {
+  data: GrowthData
+}
 
-      {
-        x: 'MAY',
-        y: 3.1
-      },
-      {
-        x: 'JUN',
-        y: 3.7
-      },
-      {
-        x: 'JUL',
-        y: 3.4
-      },
-      {
-        x: 'AUG',
-        y: 3.9
-      },
-      {
-        x: 'SEP',
-        y: 4.7
-      },
-      {
-        x: 'OCT',
-        y: 6
-      },
-      {
-        x: 'NOV',
-        y: 5.7
-      },
-      {
-        x: 'DEC',
-        y: 8
-      },
-    ]
-  },
-  {
-    id: 'SADNESS',
-    data: [
-      {
-        x: 'JAN',
-        y: 3
-      },
-      {
-        x: 'FEB',
-        y: 2.7
-      },
-      {
-        x: 'MAR',
-        y: 3.2
-      },
-      {
-        x: 'APR',
-        y: 3.6
-      },
-
-      {
-        x: 'MAY',
-        y: 4
-      },
-      {
-        x: 'JUN',
-        y: 4.2
-      },
-      {
-        x: 'JUL',
-        y: 4.3
-      },
-      {
-        x: 'AUG',
-        y: 4.9
-      },
-      {
-        x: 'SEP',
-        y: 4.7
-      },
-      {
-        x: 'OCT',
-        y: 5
-      },
-      {
-        x: 'NOV',
-        y: 5.7
-      },
-      {
-        x: 'DEC',
-        y: 7
-      },
-    ]
-  },
-  {
-    id: 'ANGER',
-    data: [
-      {
-        x: 'JAN',
-        y: 1
-      },
-      {
-        x: 'FEB',
-        y: 1.7
-      },
-      {
-        x: 'MAR',
-        y: 2
-      },
-      {
-        x: 'APR',
-        y: 2.6
-      },
-
-      {
-        x: 'MAY',
-        y: 2.4
-      },
-      {
-        x: 'JUN',
-        y: 3.2
-      },
-      {
-        x: 'JUL',
-        y: 3.7
-      },
-      {
-        x: 'AUG',
-        y: 4
-      },
-      {
-        x: 'SEP',
-        y: 4.7
-      },
-      {
-        x: 'OCT',
-        y: 5.6
-      },
-      {
-        x: 'NOV',
-        y: 6
-      },
-      {
-        x: 'DEC',
-        y: 8
-      },
-    ]
-  },
-  {
-    id: 'ANXIETY',
-    data: [
-      {
-        x: 'JAN',
-        y: 6
-      },
-      {
-        x: 'FEB',
-        y: 5.7
-      },
-      {
-        x: 'MAR',
-        y: 6.2
-      },
-      {
-        x: 'APR',
-        y: 6.4
-      },
-      {
-        x: 'MAY',
-        y: 6.6
-      },
-      {
-        x: 'JUN',
-        y: 7
-      },
-      {
-        x: 'JUL',
-        y: 7.3
-      },
-      {
-        x: 'AUG',
-        y: 7.2
-      },
-      {
-        x: 'SEP',
-        y: 8
-      },
-      {
-        x: 'OCT',
-        y: 8.1
-      },
-      {
-        x: 'NOV',
-        y: 8.2
-      },
-      {
-        x: 'DEC',
-        y: 8.5
-      },
-    ]
-  },
-  {
-    id: 'SURPRISE',
-    data: [
-      {
-        x: 'JAN',
-        y: 4
-      },
-      {
-        x: 'FEB',
-        y: 4.6
-      },
-      {
-        x: 'MAR',
-        y: 4.4
-      },
-      {
-        x: 'APR',
-        y: 5
-      },
-      {
-        x: 'MAY',
-        y: 5.2
-      },
-      {
-        x: 'JUN',
-        y: 5.5
-      },
-      {
-        x: 'JUL',
-        y: 6
-      },
-      {
-        x: 'AUG',
-        y: 6.6
-      },
-      {
-        x: 'SEP',
-        y: 7
-      },
-      {
-        x: 'OCT',
-        y: 7.3
-      },
-      {
-        x: 'NOV',
-        y: 8
-      },
-      {
-        x: 'DEC',
-        y: 8.1
-      },
-    ],
-  }
-];
-
-export default function Graph() {
+export default function Graph({
+  data,
+}: GraphProps) {
 
   const {
     blobCursorColor,
     setBlobCursorColor
   } = useBlobCursorStore();
 
+  const [end, setEnd] = useState(12); // 예: 최근 12개월만 보기
+
   const updateColor = useRef(
-    debounce((color: string) => setBlobCursorColor(color), 10)
+    debounce((color: string) => setBlobCursorColor(color), 100)
   ).current;
 
+  const { minY, maxY, handleYZoom } = useYAxisZoom(data, end);
+  const graphData = useGraphData(data, end);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.shiftKey) {
+      // X축 zoom
+      setEnd((prev) => {
+        const next = e.deltaY < 0 ? prev - 1 : prev + 1;
+        return Math.min(Math.max(next, 3), 12);
+      });
+    } else {
+      // Y축 zoom
+      handleYZoom(e.deltaY)
+    }
+  };
+
   return (
-    <div className={`cursor-none w-full h-full`}>
+    <div
+      className={`cursor-none w-full h-full z-100`}
+      onWheel={(e) => handleWheel(e)}>
       <ResponsiveLine
+        yScale={{
+          type: "linear",
+          min: minY,
+          max: maxY,
+        }}
         data={graphData}
         useMesh={true}
         colors={(serie) => EMOTION_COLOR[serie.id as Emotion]}

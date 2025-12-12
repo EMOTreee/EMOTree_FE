@@ -6,3 +6,11 @@ type Point = {
   }
   seriesId: string
 }
+
+type GrowthData = {
+  emotion: Emotion;
+  data: {
+    x: string,
+    y: number,
+  }[];
+}[];
