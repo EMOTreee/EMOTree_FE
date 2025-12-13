@@ -43,7 +43,6 @@ export default function AnalyzeExpression({
     if (!imageUrl) setCurrentMode(mode)
   }
 
-
   const handleBackspace = () => {
     setFeedback(null)
     setPhoto(null)
@@ -99,33 +98,39 @@ export default function AnalyzeExpression({
           </motion.div>
         ) : (
           <motion.div
-            key={'feedback'}
+            key={'feedback-wrapper'}
             animate={{ height: 'auto' }}
             exit={{ opacity: 0, height: 110 }}
             transition={{ duration: 0.3 }}>
-            {feedback ? (
-              <div className={`flex flex-col gap-5 min-h-[110px] w-full items-center`}>
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ opacity: 0, height: 110 }}
-                  transition={{ duration: 0.3 }}
-                  className={`${EMOTION_BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
-                  <TypingText text={feedback} />
-                </motion.div>
-                <Navigator
-                  handleBackspace={handleBackspace}
-                  handleRetry={handleRetry} />
-              </div>
-            ) : (
-              <div className={`min-h-[110px]`}>
-                <HashLoader
-                  color={EMOTION_COLOR[selectedEmotion]}
-                  loading
-                  size={40}
-                />
-              </div>
-            )}
+            <AnimatePresence mode="wait">
+              {feedback ? (
+                <Motion.div
+                  key={'feedback'}
+                  className={`flex flex-col gap-5 min-h-[110px] w-full items-center`}>
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ opacity: 0, height: 110 }}
+                    transition={{ duration: 0.3 }}
+                    className={`${EMOTION_BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
+                    <TypingText text={feedback} />
+                  </motion.div>
+                  <Navigator
+                    handleBackspace={handleBackspace}
+                    handleRetry={handleRetry} />
+                </Motion.div>
+              ) : (
+                <Motion.div
+                  key={'load'}
+                  className={`min-h-[110px]`}>
+                  <HashLoader
+                    color={EMOTION_COLOR[selectedEmotion]}
+                    loading
+                    size={40}
+                  />
+                </Motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

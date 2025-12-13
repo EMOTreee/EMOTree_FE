@@ -13,7 +13,6 @@ export default function GraphWrapper({
   monthlyReport,
 }: GraphWrapperProps) {
 
-  console.log(data)
   return (
     <Motion.div
       className={`flex flex-col h-full`}>

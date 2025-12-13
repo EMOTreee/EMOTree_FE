@@ -29,7 +29,7 @@ export default function Expression() {
           isTransitioning={isTransitioning} />
       ) : (
         <AnalyzeExpression
-          key={'expression'}
+          key={'analyze-expression'}
           selectedEmotion={selectedEmotion}
           setSelectedEmotion={setSelectedEmotion}
           currentMode={currentMode}

@@ -18,7 +18,6 @@ export const useAnalyzeExpression = (selectedEmotion: Emotion) => {
     },
     onSuccess: (data) => {
       setFeedback(data.feedback);
-      console.log("결과:", data);
     },
     onError: (e) => {
       console.error("에러:", e);
