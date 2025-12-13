@@ -61,15 +61,15 @@ const Header = () => {
           <Motion.div
             className={`flex flex-row gap-4`}>
             <p
-              className={`text-[14px] hover:text-hover-gray transition-all-300 font-medium`}
+              className={`text-[14px] max-md:text-[12px] hover:text-hover-gray transition-all-300 font-medium transition-all-300`}
               onClick={() => animateNavigate('/mypage')}>마이페이지</p>
             <p
-              className={`text-[14px] hover:text-hover-gray transition-all-300 font-medium`}
+              className={`text-[14px] max-md:text-[12px] hover:text-hover-gray transition-all-300 font-medium transition-all-300`}
               onClick={handleLogOut}>로그아웃</p>
           </Motion.div>
         ) : (
           <Motion.p
-            className={`text-[14px] max-md:text-[12px] hover:text-hover-gray transition-all-300 font-medium`}
+            className={`text-[14px] max-md:text-[12px] hover:text-hover-gray transition-all-300 font-medium transition-all-300`}
             onClick={() => navigate('http://localhost:8000/auth/kakao/login')}>카카오 로그인</Motion.p>
         )}
       </Motion.div>

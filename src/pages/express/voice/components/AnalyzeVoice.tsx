@@ -38,7 +38,7 @@ export default function AnaylzeVoice({
   }
 
   return (
-    <Motion.div className={`w-full`}>
+    <Motion.div className={`w-full select-none`}>
       <AnimatePresence mode="wait">
         {audioURL === null ? (
           <Recorder
@@ -47,42 +47,44 @@ export default function AnaylzeVoice({
             selectedEmotion={selectedEmotion as Emotion}
             setAudioURL={setAudioURL} />
         ) : (
-          <AnimatePresence mode="wait">
-            {feedback ? (
-              <Motion.div key={'feedback'} className={`flex flex-col gap-10 z-1`}>
-                <div className={`flex flex-col gap-5 items-center`}>
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ opacity: 0, height: 110 }}
-                    transition={{ duration: 0.3 }}
-                    className={`${EMOTION_BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
-                    <TypingText text={feedback} />
-                  </motion.div>
-                  <Navigator
-                    handleBackspace={handleBackspace}
-                    handleRetry={handleRetry} />
-                </div>
-                <div className={`flex flex-col gap-5`}>
-                  <div className={`flex flex-row gap-2 justify-center items-center`}>
-                    <EmotionIcon emotion={selectedEmotion} className={`w-8 h-8`} />
-                    <p className={`text-[28px]`}>표현한 <span className={`font-bold`}>감정</span>을 들어 보세요</p>
+          <Motion.div key={'feedback-wrapper'}>
+            <AnimatePresence mode="wait">
+              {feedback ? (
+                <Motion.div key={'feedback'} className={`flex flex-col gap-10 z-1`}>
+                  <div className={`flex flex-col gap-5 items-center`}>
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ opacity: 0, height: 110 }}
+                      transition={{ duration: 0.3 }}
+                      className={`${EMOTION_BG_COLOR[selectedEmotion]} rounded-[20px] px-4 py-3 text-[16px] max-md:text-[14px] w-[40vw] max-md:w-[60vw] max-sm:w-[80vw] overflow-auto no-scroll`}>
+                      <TypingText text={feedback} />
+                    </motion.div>
+                    <Navigator
+                      handleBackspace={handleBackspace}
+                      handleRetry={handleRetry} />
                   </div>
-                  <AudioPlayButton audioURL={audioURL} />
-                </div>
-              </Motion.div>
-            ) : (
-              <Motion.div
-                key={'load'}
-                className={`min-h-[110px] flex justify-center items-center`}>
-                <HashLoader
-                  color={EMOTION_COLOR[selectedEmotion]}
-                  loading
-                  size={40}
-                />
-              </Motion.div>
-            )}
-          </AnimatePresence>
+                  <div className={`flex flex-col gap-5`}>
+                    <div className={`flex flex-row gap-2 justify-center items-center`}>
+                      <EmotionIcon emotion={selectedEmotion} className={`w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6 transition-all-300`} />
+                      <p className={`text-gray text-[28px] max-lg:text-[24px] max-md:text-[20px] transition-all-300`}>표현한 <span className={`font-bold`}>감정</span>을 들어 보세요</p>
+                    </div>
+                    <AudioPlayButton audioURL={audioURL} />
+                  </div>
+                </Motion.div>
+              ) : (
+                <Motion.div
+                  key={'load'}
+                  className={`min-h-[110px] flex justify-center items-center`}>
+                  <HashLoader
+                    color={EMOTION_COLOR[selectedEmotion]}
+                    loading
+                    size={40}
+                  />
+                </Motion.div>
+              )}
+            </AnimatePresence>
+          </Motion.div>
         )}
       </AnimatePresence>
     </Motion.div>
