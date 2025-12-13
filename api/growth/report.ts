@@ -815,7 +815,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     },
     "empathyType": {
       "type": "EMOTIONAL",
-      "ratio": 0.67
+      "ratio": {
+        "emotional": 0.67,
+        "cognitive": 0.33,
+      }
     }
   }
 
