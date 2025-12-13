@@ -4,24 +4,25 @@ import { EMOTION_COLOR } from "../../../../constants/emotion";
 import { MicrophoneIcon, StartIcon, StopIcon } from "../../../../assets";
 import ExpressTitle from "../../components/ExpressTitle";
 import { useResponsiveSize } from "../../../../hooks/useResponiveSize";
+import { useRef, useState } from "react";
+import type { UseMutateFunction } from "@tanstack/react-query";
 
 type RecorderProps = {
-  isRecording: boolean
-  setIsRecording: React.Dispatch<React.SetStateAction<boolean>>
   selectedEmotion: Emotion
-  audioChunksRef: React.RefObject<Blob[]>
-  mediaRecorderRef: React.RefObject<MediaRecorder | null>
   setAudioURL: React.Dispatch<React.SetStateAction<string | null>>
+  analyzeAudio: UseMutateFunction<{ feedback: string }, Error, Blob, unknown>
 }
 
 export default function Recorder({
-  isRecording,
-  setIsRecording,
   selectedEmotion,
-  audioChunksRef,
-  mediaRecorderRef,
   setAudioURL,
+  analyzeAudio,
 }: RecorderProps) {
+
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
 
   const size = useResponsiveSize(0.4, 200, 300)
 
@@ -42,8 +43,7 @@ export default function Recorder({
         const url = URL.createObjectURL(audioBlob);
         setAudioURL(url);
 
-        // 👉 서버 업로드하려면 여기서 audioBlob 사용하면 됨
-        // uploadAudio(audioBlob)
+        analyzeAudio(audioBlob)
       };
 
       mediaRecorder.start();
@@ -85,7 +85,7 @@ export default function Recorder({
       )}
 
       <div className={`flex flex-col gap-5 items-center`}>
-        <ExpressTitle selectedEmotion={selectedEmotion}/>
+        <ExpressTitle selectedEmotion={selectedEmotion} />
         <div className={`flex flex-col gap-2 items-center select-none`}>
           <MicrophoneIcon className={`${isRecording ? `text-gray` : `text-light-gray`} w-12 h-12 max-md:w-10 max-md:h-10 transition-all-300`} />
           {isRecording ? (

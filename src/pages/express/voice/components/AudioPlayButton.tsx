@@ -9,7 +9,6 @@ export default function AudioPlayButton({ audioURL }: { audioURL: string }) {
   const playAudio = () => {
     const audio = audioRef.current;
     if (!audio) {
-      console.log("audioRef가 아직 없음");
       return;
     }
 
@@ -35,14 +34,12 @@ export default function AudioPlayButton({ audioURL }: { audioURL: string }) {
   if (!audioURL) return null;
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 z-1">
       <button
         onClick={playAudio}
-        className={`${isPlaying ? `text-gray` : `text-light-gray`} hover:text-gray transition-all-300`}
-      >
+        className={`${isPlaying ? `text-gray` : `text-light-gray`} hover:text-gray transition-all-300`}>
         <HeadphoneIcon className={`w-12 h-12 cursor-none`} />
       </button>
-
       <audio ref={audioRef} src={audioURL} className="hidden" />
     </div>
   );
