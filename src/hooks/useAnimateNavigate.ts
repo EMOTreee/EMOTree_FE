@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import useNavigateStore from "../stores/useNavigateStore";
 
 const useAnimateNavigate = () => {
-  
+
   const {
     setIsNavigating
   } = useNavigateStore();
@@ -13,7 +13,9 @@ const useAnimateNavigate = () => {
     setIsNavigating(true);
     setTimeout(() => {
       navigate(to);
-      setIsNavigating(false);
+      setTimeout(() => {
+        setIsNavigating(false);
+      }, 10);
     }, 300);
   }
 

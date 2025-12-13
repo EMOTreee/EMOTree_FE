@@ -18,8 +18,11 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
-    await getLogoutResponse()
-    setUser(null)
+    await getLogoutResponse()   
+    animateNavigate('/')
+    setTimeout(() => {
+      setUser(null)
+    }, 300);
   }
 
   const { data, isError } = useQuery({
@@ -29,10 +32,10 @@ const Header = () => {
   })
 
   useEffect(() => {
-    if (data?.detail === null) {
+    if (data?.email !== null && data?.name !== null) {
       setUser({
-        name: data.name,
-        email: data.email,
+        name: data?.name,
+        email: data?.email,
       });
     } else {
       setUser(null)
@@ -40,7 +43,9 @@ const Header = () => {
   }, [data])
 
   useEffect(() => {
-    if (isError) setUser(null)
+    if (isError) {
+      setUser(null)
+    }
   }, [isError])
 
   return (

@@ -5,9 +5,11 @@ export const useGrowth = () => {
 
   const {
     data: growthData,
+    isError,
   } = useQuery({
     queryKey: ['growth'],
     queryFn: () => getGrowthResponse(),
+    retry: 0,
   })
 
   const interpretGrowthList = growthData?.interpretGrowthList
@@ -22,5 +24,6 @@ export const useGrowth = () => {
     expressGrowthList,
     monthlyReport,
     empathyType,
+    isError,
   }
 }

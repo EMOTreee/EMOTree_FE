@@ -5,7 +5,10 @@ type EmpathyTypeProps = {
   userName: string | null | undefined;
   empathyType: {
     type: "EMOTIONAL" | "COGNITIVE";
-    ratio: number;
+    ratios: {
+      emotional: number;
+      cognitive: number;
+    };
   }
 }
 
@@ -14,8 +17,8 @@ export default function EmpathyType({
   empathyType,
 }: EmpathyTypeProps) {
 
-  const emotionalRatio = empathyType?.type === "EMOTIONAL" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100 | 0
-  const cognitiveRatio = empathyType?.type === "COGNITIVE" ? empathyType?.ratio * 100 : 100 - empathyType?.ratio * 100 | 0
+  const emotionalRatio = empathyType?.ratios.emotional * 100 | 0
+  const cognitiveRatio = empathyType?.ratios.cognitive * 100 | 0
 
   const emotionalSpring = useSpring({ from: { val: 0 }, val: emotionalRatio, config: { duration: 500, easing: easings.easeInOutCubic } });
   const cognitiveSpring = useSpring({ from: { val: 0 }, val: cognitiveRatio, config: { duration: 500, easing: easings.easeInOutCubic } });
@@ -27,7 +30,7 @@ export default function EmpathyType({
         {userName} 님의 공감 유형
       </p>
       <div className={`flex flex-col w-full h-full overflow-hidden gap-1`}>
-        <div className={`flex flex-row w-full h-full min-h-4`}>
+        <div className={`flex flex-row w-full h-full min-h-4 rounded-md overflow-hidden`}>
           <motion.div
             className={`rounded-l-md opacity-60 bg-purple h-full flex justify-center items-center font-semibold`}
             initial={{ width: 0 }}
