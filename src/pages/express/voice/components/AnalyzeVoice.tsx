@@ -26,15 +26,18 @@ export default function AnaylzeVoice({
   const {
     analyzeAudio,
     feedback,
+    setFeedback,
   } = useAnalyzeVoice(selectedEmotion)
 
   const handleBackspace = () => {
     setSelectedEmotion(null)
     setAudioURL(null)
+    setFeedback(null)
   }
 
   const handleRetry = () => {
     setAudioURL(null)
+    setFeedback(null)
   }
 
   return (
