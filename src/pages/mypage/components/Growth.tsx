@@ -49,14 +49,14 @@ export default function Growth() {
 
   return (
     user &&
-    <Motion.div className={`w-screen h-screen responsive-p-t pb-10 px-25 flex flex-col select-none`}>
-      <div className={`flex flex-col justify-center items-center gap-7 h-full py-15`}>
-        <p className={`text-[28px]`}><span className={`font-bold`}>{user?.name}</span> 님의 성장 기록</p>
+    <Motion.div className={`w-screen h-screen responsive-p-t pb-10 px-25 max-md:px-10 flex flex-col select-none`}>
+      <div className={`flex flex-col justify-center items-center gap-7 max-md:gap-4 h-full py-15`}>
+        <p className={`text-[28px] max-md:text-[24px] max-sm:text-[20px]`}><span className={`font-bold`}>{user?.name}</span> 님의 성장 기록</p>
         <div className={`w-full h-full flex flex-col gap-2`}>
           <EmpathyType userName={user?.name} empathyType={empathyType} />
           <div className={`w-full h-full rounded-[20px] border border-gray cursor-none`}>
             <div className={`w-full h-full flex flex-col`}>
-              <div className={`flex flex-row justify-around text-[20px] font-semibold`}>
+              <div className={`flex flex-row justify-around text-[20px] max-md:text-[16px] max-sm:text-[12px] font-semibold`}>
                 {TABS.map((tab) => (
                   <p
                     key={tab.title}

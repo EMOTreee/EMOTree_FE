@@ -25,8 +25,8 @@ export default function EmpathyType({
 
 
   return (
-    <div className={`flex flex-row gap-5 justify-center items-center px-5 py-2.5`}>
-      <p className={`w-fit shrink-0 text-gray text-[20px] font-semibold`}>
+    <div className={`flex flex-row gap-5 justify-center items-center px-5 py-2.5 max-md:flex-col max-md:gap-2`}>
+      <p className={`w-fit shrink-0 text-gray text-[20px] max-md:text-[16px] font-semibold`}>
         {userName} 님의 공감 유형
       </p>
       <div className={`flex flex-col w-full h-full overflow-hidden gap-1`}>

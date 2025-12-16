@@ -18,7 +18,7 @@ export default function Chat({
 
   return (
     <Motion.div className={`w-full flex opacity-80 select-none ${isUser ? `justify-end` : `justify-start`} min-w-10 h-fit shrink-0`}>
-      <div className={`h-fit max-w-[400px] px-4 py-3 content-center rounded-[20px] text-[16px] min-h-[50px] whitespace-pre-wrap
+      <div className={`h-fit max-w-[400px] px-4 py-3 content-center rounded-[20px] text-[16px] max-md:text-[14px] max-md:px-3.5 max-md:py-2.5 min-h-[50px] whitespace-pre-wrap transition-all-300
         ${isPending ? `text-gray` : `text-black`}
         ${isUser ? `border border-gray` : `${EMOTION_BG_COLOR[emotion]}`}`}>
         {isUser ? text : (

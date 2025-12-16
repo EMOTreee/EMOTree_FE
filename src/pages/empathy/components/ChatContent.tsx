@@ -43,7 +43,7 @@ export default function ChatContent({
 
   return (
     <Motion.div
-      className={`w-full h-full responsive-p-t px-20 pb-[60px] flex flex-col items-center justify-start gap-10`}>
+      className={`w-full h-full responsive-p-t px-20 max-md:px-10 pb-[60px] flex flex-col items-center justify-start gap-10`}>
       <AnimatePresence>
         <div className={`w-full h-full flex flex-col gap-5 no-scroll overflow-scroll z-1`}>
           <EmpathyTitle emotion={selectedEmotion} />

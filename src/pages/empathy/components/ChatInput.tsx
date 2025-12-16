@@ -35,9 +35,9 @@ export default function ChatInput({
   }
 
   return (
-    <div className={`w-full fixed bottom-0 px-20 pb-10 z-1 select-none`}>
+    <div className={`w-full fixed bottom-0 px-20 max-md:px-10 pb-10 z-1 select-none text-[16px] max-md:text-[14px]`}>
       <div 
-        className={`w-full flex flex-row justify-between items-start rounded-[20px] px-4 py-3 border border-gray transition-all-300 bg-white z-1`}
+        className={`w-full flex flex-row justify-between items-center rounded-[20px] px-4 py-3 max-md:px-3.5 max-md:py-2.5 border border-gray transition-all-300 bg-white z-1`}
         onClick={handleContainerClick}>
         <AutoHeightTextarea
           minHeight={24}
@@ -49,7 +49,7 @@ export default function ChatInput({
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => handleEnter(e)} />
         <Plane
-          className={`w-5 h-5 transition-all-300 z-1 ${text.trim() !== "" ? `text-gray` : `text-light-gray`}`}
+          className={`w-5 h-5 max-md:2-4 max-md:h-4 transition-all-300 z-1 ${text.trim() !== "" ? `text-gray` : `text-light-gray`}`}
           onClick={() => handleMessage()} />
       </div>
     </div>

@@ -10,10 +10,10 @@ export default function EmpathyTitle({
 }: EmpathyTitleProp) {
 
   return (
-    <div className={`w-full flex flex-row items-center justify-center gap-2 text-gray text-[28px] pt-8 pb-5 select-none`}>
+    <div className={`w-full flex flex-row items-center justify-center gap-2 max-sm:gap-1.5 text-gray text-[28px] max-md:text-[24px] max-sm:text-[20px] pt-8 pb-5 select-none transition-all-300`}>
       <EmotionIcon
         emotion={emotion}
-        className={`w-8 h-8`} />
+        className={`w-8 h-8 max-md:w-7 max-md:h-7 max-sm:w-6 max-sm:h-6 transition-all-300`} />
       <p>
         <span className={`font-bold`}>
           {emotion === 'RANDOM' ? '감정' : EMOTION_LABEL[emotion]}
