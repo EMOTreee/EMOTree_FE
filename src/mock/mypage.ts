@@ -814,7 +814,10 @@ export default function () {
           },
           "empathyType": {
             "type": "EMOTIONAL",
-            "ratio": 0.67
+            "ratios": {
+              "emotional": 0.67,
+              "cognitive": 0.33
+            }
           }
         }
         return data
