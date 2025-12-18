@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import gsap from 'gsap';
+import { useIsMobile } from '../../hooks/useMobile';
 
 export interface BlobCursorProps {
   blobType?: 'circle' | 'square';
@@ -48,6 +49,25 @@ export default function BlobCursor({
 }: BlobCursorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const blobsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const isMobile = useIsMobile();
+
+  const scale = isMobile ? 0.7 : 1;
+
+  const finalSizes = useMemo(
+    () => sizes.map(s => s * scale),
+    [sizes, scale]
+  );
+
+  const finalInnerSizes = useMemo(
+    () => innerSizes.map(s => s * scale),
+    [innerSizes, scale]
+  );
+
+  const finalTrailCount = useMemo(
+    () => (isMobile ? Math.min(trailCount, 2) : trailCount),
+    [trailCount, isMobile]
+  );
 
   const updateOffset = useCallback(() => {
     if (!containerRef.current) return { left: 0, top: 0 };
@@ -123,7 +143,7 @@ export default function BlobCursor({
         className="pointer-events-none select-none absolute inset-0 overflow-hidden transition-color-300 -z-10"
         style={{ filter: useFilter ? `url(#${filterId})` : undefined }}
       >
-        {Array.from({ length: trailCount }).map((_, i) => (
+        {Array.from({ length: finalTrailCount }).map((_, i) => (
           <div
             key={i}
             ref={el => {
@@ -131,8 +151,8 @@ export default function BlobCursor({
             }}
             className="pointer-events-none select-none absolute will-change-transform transform -translate-x-1/2 -translate-y-1/2 transition-color-300 -z-10"
             style={{
-              width: sizes[i],
-              height: sizes[i],
+              width: finalSizes[i],
+              height: finalSizes[i],
               borderRadius: blobType === 'circle' ? '50%' : '0',
               backgroundColor: fillColor,
               opacity: opacities[i],
@@ -142,10 +162,10 @@ export default function BlobCursor({
             <div
               className="pointer-events-none select-none absolute transition-color-300 -z-10"
               style={{
-                width: innerSizes[i],
-                height: innerSizes[i],
-                top: (sizes[i] - innerSizes[i]) / 2,
-                left: (sizes[i] - innerSizes[i]) / 2,
+                width: finalInnerSizes[i],
+                height: finalInnerSizes[i],
+                top: (finalSizes[i] - finalInnerSizes[i]) / 2,
+                left: (finalSizes[i] - finalInnerSizes[i]) / 2,
                 backgroundColor: innerColor,
                 borderRadius: blobType === 'circle' ? '50%' : '0'
               }}

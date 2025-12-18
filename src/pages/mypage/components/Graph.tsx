@@ -6,6 +6,8 @@ import { debounce } from "lodash"
 import { EMOTION_COLOR } from "../../../constants/emotion";
 import { useYAxisZoom } from "../hooks/useYAxisZoom";
 import { useGraphData } from "../hooks/useGraphData";
+import { useIsMobile } from "../../../hooks/useMobile";
+import MobileLegends from "./MobileLegends";
 
 type GraphProps = {
   data: GrowthData
@@ -42,10 +44,35 @@ export default function Graph({
     }
   };
 
+  const isMobile = useIsMobile();
+
+  const legends: LegendProps[] = isMobile ? [] : [
+    {
+      anchor: "bottom-right",
+      direction: "column",
+      translateX: 100,
+      itemsSpacing: 4,
+      itemWidth: 80,
+      itemHeight: 20,
+      symbolSize: 12,
+      symbolShape: "square",
+    },
+  ]
+
+  const emotionList = ["ANXIETY", "SURPRISE", "ANGER", "SADNESS", "JOY"]
+
   return (
     <div
-      className={`cursor-none w-full h-full z-100`}
+      className={`cursor-none mt-5 w-full h-full z-100 flex flex-col`}
       onWheel={(e) => handleWheel(e)}>
+      {isMobile && (
+        <div className="flex flex-row gap-2 w-full justify-end px-10">
+          {emotionList.map((emotion) => (
+            <MobileLegends emotion={emotion as Emotion}/>
+          ))}
+          
+        </div>
+      )}
       <ResponsiveLine
         yScale={{
           type: "linear",
@@ -62,20 +89,14 @@ export default function Graph({
         }
         curve='linear'
         pointSize={10}
-        margin={{ top: 40, bottom: 40, left: 40, right: 120 }}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            translateX: 100,
-            itemsSpacing: 4,
-            itemWidth: 80,
-            itemHeight: 20,
-            symbolSize: 12,
-            symbolShape: "square",
-          },
-        ]}
+        margin={{ top: isMobile ? 20 : 40, bottom: 40, left: 40, right: isMobile ? 40 : 120 }}
+        legends={legends}
         onMouseMove={(point) => {
+          const p = point as Point;
+          if (p.borderColor !== blobCursorColor)
+            updateColor(p.borderColor)
+        }}
+        onTouchMove={(point) => {
           const p = point as Point;
           if (p.borderColor !== blobCursorColor)
             updateColor(p.borderColor)
