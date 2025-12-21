@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# 😄EMOTree
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/08c2734b-2a7c-43a2-a451-7d0199d531ad" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 서비스 링크 : https://emotreee.vercel.app
 
-Currently, two official plugins are available:
+🔗 시연 영상 : https://youtu.be/b-ayNzCNt68
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br/>
+<br/>
 
-## React Compiler
+## 📅 프로젝트 개발 기간
+> 2025.11.17 ~ 2025.12.12
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+<br/>
+<br/>
 
-## Expanding the ESLint configuration
+## 🔍 프로젝트 소개
+> 감정을 알아가는 과정, 표현을 연습하는 시간,
+>
+> **EMOTree**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/44b52a31-108b-4b51-92cc-db8b4c02b9ba" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/64c739f2-aeae-4386-b4c8-af46bc80f0f2" />
+<img width="1920" height="1080" alt="5" src="https://github.com/user-attachments/assets/d69f7793-5483-4058-9c39-1c41e1e5b9b2" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/1e86bc26-aba4-4678-91cb-ba8bc7b57724" />
+<img width="1920" height="1080" alt="12" src="https://github.com/user-attachments/assets/ff9e6b88-e001-411b-a28d-a955ca71a554" />
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+<br/>
+<br/>
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ 기술스택
+| 역할                 | 종류                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Programming Language | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)                                                                                                                                                                                                                                |
+| Library              | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)                                                                                                 |
+| Styling              | ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white)                                                                                                                                                                                           |
+| Data Fetching        | ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white) ![ReactQuery](https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white)                                                                                             |
+| Formatting           | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)                                                                                               |
+| Package Manager      | ![Pnpm](https://img.shields.io/badge/Pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white)                                                                                                                                                                                                                 |
+| Version Control      | ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)                                                                                              |
+| Deploy               | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)    
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 👥 Developer
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| DESIGN/FE |
+| :-----: |
+| <img style="width: 150px;" src="https://github.com/jjjuni.png" /> |
+|[이준희](https://github.com/jjjuni)|
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+</div>
+
+<br/>
+<br/>
